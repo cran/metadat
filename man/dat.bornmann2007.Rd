@@ -3,7 +3,9 @@
 \alias{dat.bornmann2007}
 \title{Studies on Gender Differences in Grant and Fellowship Awards}
 \description{Results from 21 studies on gender differences in grant and fellowship awards.}
-\usage{dat.bornmann2007}
+\usage{
+dat.bornmann2007
+}
 \format{The data frame contains the following columns:
 \tabular{lll}{
 \bold{study}      \tab \code{character} \tab study reference \cr
@@ -41,7 +43,7 @@ head(dat, 16)
 \dontrun{
 
 ### load metafor package
-require(metafor)
+library(metafor)
 
 ### calculate log odds ratios and corresponding sampling variances
 dat <- escalc(measure="OR", ai=waward, n1i=wtotal, ci=maward, n2i=mtotal, data=dat)
@@ -50,7 +52,7 @@ dat <- escalc(measure="OR", ai=waward, n1i=wtotal, ci=maward, n2i=mtotal, data=d
 res <- rma.mv(yi, vi, random = ~ 1 | study/obs, data=dat)
 res
 
-### estimated average odds ratio (with 95% CI/PI)
+### estimated average odds ratio (with 95\% CI/PI)
 predict(res, transf=exp, digits=2)
 
 ### test for a difference between fellowship and grant applications
@@ -64,3 +66,6 @@ predict(res, newmods=0:1, transf=exp, digits=2)
 \concept{sociology}
 \concept{odds ratios}
 \concept{multilevel models}
+\section{Concepts}{
+   sociology, odds ratios, multilevel models
+}

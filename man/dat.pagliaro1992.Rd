@@ -3,7 +3,9 @@
 \alias{dat.pagliaro1992}
 \title{Studies on the Effectiveness of Nonsurgical Treatments in Cirrhosis}
 \description{Results from 26 trials examining the effectiveness of beta-blockers and sclerotherapy for the prevention of first bleeding in patients with cirrhosis}
-\usage{dat.pagliaro1992}
+\usage{
+dat.pagliaro1992
+}
 \format{The data frame contains the following columns:
 \tabular{lll}{
 \bold{study}    \tab \code{numeric}   \tab study id \cr
@@ -29,7 +31,7 @@ dat
 \dontrun{
 
 ### load metafor package
-require(metafor)
+library(metafor)
 
 ### restructure dataset to a contrast-based format
 dat.c <- to.wide(dat, study="study", grp="trt", grpvars=3:4)
@@ -70,3 +72,6 @@ predict(res, newmods=c(rep(0,26), 1, -1), transf=exp, digits=2)
 \concept{odds ratios}
 \concept{Mantel-Haenszel method}
 \concept{network meta-analysis}
+\section{Concepts}{
+   medicine, odds ratios, Mantel-Haenszel method, network meta-analysis
+}

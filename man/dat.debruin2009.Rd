@@ -3,7 +3,9 @@
 \alias{dat.debruin2009}
 \title{Studies on Standard Care Quality and HAART-Adherence}
 \description{Results from 13 trials providing information about standard care quality and HAART-adherence in control groups.}
-\usage{dat.debruin2009}
+\usage{
+dat.debruin2009
+}
 \format{The data frame contains the following columns:
 \tabular{lll}{
 \bold{author}      \tab \code{character} \tab (first) author of study \cr
@@ -35,7 +37,7 @@ dat
 \dontrun{
 
 ### load metafor package
-require(metafor)
+library(metafor)
 
 ### calculate proportions and corresponding sampling variances
 dat <- escalc(measure="PR", xi=xi, ni=ni, data=dat)
@@ -61,3 +63,6 @@ print(res, digits=3)
 \concept{proportions}
 \concept{single-arm studies}
 \concept{meta-regression}
+\section{Concepts}{
+   psychology, medicine, proportions, single-arm studies, meta-regression
+}

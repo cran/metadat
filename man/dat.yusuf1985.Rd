@@ -3,7 +3,9 @@
 \alias{dat.yusuf1985}
 \title{Studies of Beta Blockers During and After Myocardial Infarction}
 \description{Results from studies examining the effectiveness of beta blockers for reducing mortality and reinfarction. \loadmathjax}
-\usage{dat.yusuf1985}
+\usage{
+dat.yusuf1985
+}
 \format{The data frame contains the following columns:
 \tabular{lll}{
 \bold{table}  \tab \code{character} \tab table number \cr
@@ -34,10 +36,10 @@ dat[dat$table == 6,]
 \dontrun{
 
 ### load metafor package
-require(metafor)
+library(metafor)
 
 ### to select a table for the analysis
-tab <- "6" ### either: 6, 9, 10, 11, 12a, 12b
+tab <- "6" # either: 6, 9, 10, 11, 12a, 12b
 
 ### to double-check total counts as reported in article
 apply(dat[dat$table==tab,4:7], 2, sum, na.rm=TRUE)
@@ -54,3 +56,6 @@ predict(res, transf=exp, digits=2)
 \concept{cardiology}
 \concept{odds ratios}
 \concept{Peto's method}
+\section{Concepts}{
+   medicine, cardiology, odds ratios, Peto's method
+}

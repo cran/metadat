@@ -3,7 +3,9 @@
 \alias{dat.nielweise2007}
 \title{Studies on Anti-Infective-Treated Central Venous Catheters for Prevention of Catheter-Related Bloodstream Infections}
 \description{Results from 18 studies comparing the risk of catheter-related bloodstream infection when using anti-infective-treated versus standard catheters in the acute care setting.}
-\usage{dat.nielweise2007}
+\usage{
+dat.nielweise2007
+}
 \format{The data frame contains the following columns:
 \tabular{lll}{
 \bold{study}  \tab \code{numeric}   \tab study number \cr
@@ -37,7 +39,7 @@ dat
 \dontrun{
 
 ### load metafor package
-require(metafor)
+library(metafor)
 
 ### standard (inverse-variance) random-effects model
 res <- rma(measure="OR", ai=ai, n1i=n1i, ci=ci, n2i=n2i, data=dat, drop00=TRUE)
@@ -55,3 +57,6 @@ predict(res, transf=exp, digits=2)
 \concept{medicine}
 \concept{odds ratios}
 \concept{generalized linear models}
+\section{Concepts}{
+   medicine, odds ratios, generalized linear models
+}

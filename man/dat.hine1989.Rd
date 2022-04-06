@@ -3,7 +3,9 @@
 \alias{dat.hine1989}
 \title{Studies on Prophylactic Use of Lidocaine After a Heart Attack}
 \description{Results from 6 studies evaluating mortality from prophylactic use of lidocaine in acute myocardial infarction.}
-\usage{dat.hine1989}
+\usage{
+dat.hine1989
+}
 \format{The data frame contains the following columns:
 \tabular{lll}{
 \bold{study}  \tab \code{numeric}   \tab study number \cr
@@ -36,7 +38,7 @@ dat
 \dontrun{
 
 ### load metafor package
-require(metafor)
+library(metafor)
 
 ### calculate risk differences and corresponding sampling variances
 dat <- escalc(measure="RD", n1i=n1i, n2i=n2i, ai=ai, ci=ci, data=dat)
@@ -52,3 +54,6 @@ res
 \concept{medicine}
 \concept{cardiology}
 \concept{risk differences}
+\section{Concepts}{
+   medicine, cardiology, risk differences
+}

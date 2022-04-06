@@ -3,7 +3,9 @@
 \alias{dat.hackshaw1998}
 \title{Studies on the Risk of Lung Cancer in Women Exposed to Environmental Tobacco Smoke}
 \description{Results from 37 studies on the risk of lung cancer in women exposed to environmental tobacco smoke (ETS) from their smoking spouse.}
-\usage{dat.hackshaw1998}
+\usage{
+dat.hackshaw1998
+}
 \format{The data frame contains the following columns:
 \tabular{lll}{
 \bold{study}      \tab \code{numeric}    \tab study number \cr
@@ -40,7 +42,7 @@ head(dat, 10)
 \dontrun{
 
 ### load metafor package
-require(metafor)
+library(metafor)
 
 ### random-effects model using the log odds ratios
 res <- rma(yi, vi, data=dat, method="DL")
@@ -60,4 +62,8 @@ dat$vi <- ((log(dat$or.ub) - log(dat$or.lb)) / (2*qnorm(.975)))^2
 \concept{medicine}
 \concept{oncology}
 \concept{epidemiology}
+\concept{smoking}
 \concept{odds ratios}
+\section{Concepts}{
+   medicine, oncology, epidemiology, smoking, odds ratios
+}

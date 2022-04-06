@@ -3,7 +3,9 @@
 \alias{dat.collins1985b}
 \title{Studies on the Effects of Diuretics in Pregnancy}
 \description{Results from 9 studies examining the effects of diuretics in pregnancy on various outcomes.}
-\usage{dat.collins1985b}
+\usage{
+dat.collins1985b
+}
 \format{The data frame contains the following columns:
 \tabular{lll}{
 \bold{id}      \tab \code{numeric}   \tab study number \cr
@@ -41,7 +43,7 @@ dat
 \dontrun{
 
 ### load metafor package
-require(metafor)
+library(metafor)
 
 ### calculate (log) odds ratio and sampling variance
 dat <- escalc(measure="OR", n1i=pre.nti, n2i=pre.nci, ai=pre.xti, ci=pre.xci, data=dat)
@@ -65,3 +67,6 @@ rma.peto(n1i=fup.nti, n2i=fup.nci, ai=ned.xti, ci=ned.xci, data=dat, digits=2)
 \concept{obstetrics}
 \concept{odds ratios}
 \concept{Peto's method}
+\section{Concepts}{
+   medicine, obstetrics, odds ratios, Peto's method
+}

@@ -3,7 +3,9 @@
 \alias{dat.curtis1998}
 \title{Studies on the Effects of Elevated CO2 Levels on Woody Plant Mass}
 \description{Results from studies examining the effects of elevated CO2 levels on woody plant mass.}
-\usage{dat.curtis1998}
+\usage{
+dat.curtis1998
+}
 \format{The data frame contains the following columns:
 \tabular{lll}{
 \bold{id}       \tab \code{numeric}   \tab observation number \cr
@@ -58,7 +60,7 @@ head(dat)
 \dontrun{
 
 ### load metafor package
-require(metafor)
+library(metafor)
 
 ### calculate (log transformed) ratios of means and corresponding sampling variances
 dat <- escalc(measure="ROM", m1i=m1i, sd1i=sd1i, n1i=n1i,
@@ -85,3 +87,6 @@ predict(res, transf=exp, digits=2)
 \keyword{datasets}
 \concept{ecology}
 \concept{ratios of means}
+\section{Concepts}{
+   ecology, ratios of means
+}

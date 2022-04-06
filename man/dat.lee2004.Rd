@@ -3,7 +3,9 @@
 \alias{dat.lee2004}
 \title{Studies on Acupoint P6 Stimulation for Preventing Nausea}
 \description{Results from studies examining the effectiveness of wrist acupuncture point P6 stimulation for preventing postoperative nausea.}
-\usage{dat.lee2004}
+\usage{
+dat.lee2004
+}
 \format{The data frame contains the following columns:
 \tabular{lll}{
 \bold{id}     \tab \code{numeric}   \tab trial id number \cr
@@ -32,7 +34,7 @@ dat
 \dontrun{
 
 ### load metafor package
-require(metafor)
+library(metafor)
 
 ### meta-analysis based on log risk ratios
 res <- rma(measure="RR", ai=ai, n1i=n1i, ci=ci, n2i=n2i, data=dat)
@@ -45,3 +47,6 @@ predict(res, transf=exp, digits=2)
 \concept{medicine}
 \concept{alternative medicine}
 \concept{risk ratios}
+\section{Concepts}{
+   medicine, alternative medicine, risk ratios
+}

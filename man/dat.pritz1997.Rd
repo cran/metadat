@@ -3,7 +3,9 @@
 \alias{dat.pritz1997}
 \title{Studies on the Effectiveness of Hyperdynamic Therapy for Treating Cerebral Vasospasm}
 \description{Results from 14 studies on the effectiveness of hyperdynamic therapy for treating cerebral vasospasm.}
-\usage{dat.pritz1997}
+\usage{
+dat.pritz1997
+}
 \format{The data frame contains the following columns:
 \tabular{lll}{
 \bold{study}    \tab \code{numeric}   \tab study number \cr
@@ -19,6 +21,8 @@
    Zhou, X.-H., Brizendine, E. J., & Pritz, M. B. (1999). Methods for combining rates from several studies. \emph{Statistics in Medicine}, \bold{18}(5), 557--566. \verb{https://doi.org/10.1002/(SICI)1097-0258(19990315)18:5<557::AID-SIM53>3.0.CO;2-F}
 }
 \references{
+   Pritz M. B., Zhou, X.-H., & Brizendine, E. J. (1996). Hyperdynamic therapy for cerebral vasospasm: A meta-analysis of 14 studies. \emph{Journal of Neurovascular Disease}, \bold{1}, 6--8.
+
    Pritz, M. B. (1997). Treatment of cerebral vasospasm due to aneurysmal subarachnoid hemorrhage: Past, present, and future of hyperdynamic therapy. \emph{Neurosurgery Quarterly}, \bold{7}(4), 273--285.
 }
 \author{
@@ -32,7 +36,7 @@ dat
 \dontrun{
 
 ### load metafor package
-require(metafor)
+library(metafor)
 
 ### computation of "weighted average" in Zhou et al. (1999), Table IV
 dat <- escalc(measure="PR", xi=xi, ni=ni, data=dat, add=0)
@@ -42,8 +46,8 @@ ci.lb        <- theta.hat - 1.96 * se.theta.hat
 ci.ub        <- theta.hat + 1.96 * se.theta.hat
 round(c(estimate = theta.hat, se = se.theta.hat, ci.lb = ci.lb, ci.ub = ci.ub), 4)
 
-### this is identical to a FE model with sample size weights
-rma(yi, vi, weights=ni, method="FE", data=dat)
+### this is identical to an equal-effects model with sample size weights
+rma(yi, vi, weights=ni, method="EE", data=dat)
 
 ### random-effects model with raw proportions
 dat <- escalc(measure="PR", xi=xi, ni=ni, data=dat)
@@ -65,3 +69,6 @@ predict(res, transf=transf.ilogit)
 \concept{medicine}
 \concept{single-arm studies}
 \concept{proportions}
+\section{Concepts}{
+   medicine, single-arm studies, proportions
+}

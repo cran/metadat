@@ -1,7 +1,7 @@
 \name{dat.lim2014}
 \docType{data}
 \alias{dat.lim2014}
-\title{Studies on the association between maternal size, offspring size, and number of offsprings}
+\title{Studies on the Association Between Maternal Size, Offspring Size, and Number of Offsprings}
 \description{Results from studies examining the association between maternal size, offspring size, and number of offsprings.}
 \usage{
 dat.lim2014
@@ -33,6 +33,8 @@ dat.lim2014
    Lim, J. N., Senior, A. M., & Nakagawa, S. (2014). Heterogeneity in individual quality and reproductive trade-offs within species. \emph{Evolution}, \bold{68}(8), 2306--2318. \verb{https://doi.org/10.1111/evo.12446}
 }
 \references{
+   Cinar, O., Nakagawa, S., & Viechtbauer, W. (in press). Phylogenetic multilevel meta-analysis: A simulation study on the importance of modelling the phylogeny. \emph{Methods in Ecology and Evolution}. \verb{https://doi.org/10.1111/2041-210X.13760}
+
    Hadfield, J. D., & Nakagawa, S. (2010). General quantitative genetic methods for comparative biology: Phylogenies, taxonomies and multi-trait models for continuous and categorical characters. \emph{Journal of Evolutionary Biology}, \bold{23}(3), 494--508. \verb{https://doi.org/10.1111/j.1420-9101.2009.01915.x}
 
    Nakagawa, S., & Santos, E. S. A. (2012). Methodological issues and advances in biological meta-analysis. \emph{Evolutionary Ecology}, \bold{26}(5), 1253--1274. \verb{https://doi.org/10.1007/s10682-012-9555-5}
@@ -43,15 +45,15 @@ dat.lim2014
 \examples{
 ### copy data into 'dat' and examine data
 dat <- dat.lim2014$o_o_unadj
-head(dat)
+dat[1:14, -c(2:3)]
 
 \dontrun{
 
 ### load metafor package
-require(metafor)
+library(metafor)
 
 ### load ape package
-require(ape, warn.conflicts=FALSE, quietly=TRUE)
+library(ape, warn.conflicts=FALSE)
 
 ### calculate r-to-z transformed correlations and corresponding sampling variances
 dat <- escalc(measure="ZCOR", ri=ri, ni=ni, data=dat)
@@ -85,3 +87,6 @@ res
 \concept{correlation coefficients}
 \concept{multilevel models}
 \concept{phylogeny}
+\section{Concepts}{
+   ecology, evolution, correlation coefficients, multilevel models, phylogeny
+}

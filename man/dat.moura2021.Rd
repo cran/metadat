@@ -8,21 +8,21 @@ dat.moura2021
 }
 \format{The object is a list containing a data frame called \code{dat} that contains the following columns and a phylogenetic tree called \code{tree}:
 \tabular{lll}{
-\bold{study.id}               \tab \code{character} \tab study id \cr
-\bold{effect.size.id}         \tab \code{numeric}   \tab effect size id \cr
-\bold{species}                \tab \code{character} \tab species \cr
-\bold{species.id}             \tab \code{character} \tab species id (as in the Open Tree of Life reference taxonomy) \cr
-\bold{subphylum}              \tab \code{character} \tab the subphyla of the species \cr
-\bold{phylum}                 \tab \code{character} \tab the phyla of the species \cr
-\bold{assortment.trait}       \tab \code{character} \tab the measure of body size \cr
-\bold{trait.dimensions}       \tab \code{character} \tab dimensionality of the measure \cr
-\bold{field.collection}       \tab \code{character} \tab whether data were collected in the field \cr
-\bold{publication.year}       \tab \code{numeric}   \tab publication year of the study \cr
-\bold{pooled.data}            \tab \code{character} \tab whether data were pooled either spatially and/or temporally \cr
-\bold{spatially.pooled.data}  \tab \code{character} \tab whether data were pooled spatially \cr
-\bold{temporally.pooled.data} \tab \code{character} \tab whether data were pooled temporally \cr
-\bold{ri}                     \tab \code{numeric}   \tab correlation coefficient \cr
-\bold{ni}                     \tab \code{numeric}   \tab sample size
+\bold{study.id}          \tab \code{character} \tab study id \cr
+\bold{effect.size.id}    \tab \code{numeric}   \tab effect size id \cr
+\bold{species}           \tab \code{character} \tab species \cr
+\bold{species.id}        \tab \code{character} \tab species id (as in the Open Tree of Life reference taxonomy) \cr
+\bold{subphylum}         \tab \code{character} \tab the subphyla of the species \cr
+\bold{phylum}            \tab \code{character} \tab the phyla of the species \cr
+\bold{assortment.trait}  \tab \code{character} \tab the measure of body size \cr
+\bold{trait.dimensions}  \tab \code{character} \tab dimensionality of the measure \cr
+\bold{field.collection}  \tab \code{character} \tab whether data were collected in the field \cr
+\bold{publication.year}  \tab \code{numeric}   \tab publication year of the study \cr
+\bold{pooled.data}       \tab \code{character} \tab whether data were pooled either spatially and/or temporally \cr
+\bold{spatially.pooled}  \tab \code{character} \tab whether data were pooled spatially \cr
+\bold{temporally.pooled} \tab \code{character} \tab whether data were pooled temporally \cr
+\bold{ri}                \tab \code{numeric}   \tab correlation coefficient \cr
+\bold{ni}                \tab \code{numeric}   \tab sample size
 }
 }
 \details{
@@ -32,6 +32,8 @@ dat.moura2021
    Rios Moura, R., Oliveira Gonzaga, M., Silva Pinto, N., Vasconcellos-Neto, J., & Requena, G. S. (2021). Assortative mating in space and time: Patterns and biases. \emph{Ecology Letters}, \bold{24}(5), 1089--1102. \verb{https://doi.org/10.1111/ele.13690}
 }
 \references{
+   Cinar, O., Nakagawa, S., & Viechtbauer, W. (in press). Phylogenetic multilevel meta-analysis: A simulation study on the importance of modelling the phylogeny. \emph{Methods in Ecology and Evolution}. \verb{https://doi.org/10.1111/2041-210X.13760}
+
    Hadfield, J. D., & Nakagawa, S. (2010). General quantitative genetic methods for comparative biology: Phylogenies, taxonomies and multi-trait models for continuous and categorical characters. \emph{Journal of Evolutionary Biology}, \bold{23}(3), 494--508. \verb{https://doi.org/10.1111/j.1420-9101.2009.01915.x}
 
    Nakagawa, S., & Santos, E. S. A. (2012). Methodological issues and advances in biological meta-analysis. \emph{Evolutionary Ecology}, \bold{26}(5), 1253--1274. \verb{https://doi.org/10.1007/s10682-012-9555-5}
@@ -47,10 +49,10 @@ head(dat)
 \dontrun{
 
 ### load metafor package
-require(metafor)
+library(metafor)
 
 ### load ape package
-require(ape, warn.conflicts=FALSE, quietly=TRUE)
+library(ape, warn.conflicts=FALSE)
 
 ### calculate r-to-z transformed correlations and corresponding sampling variances
 dat <- escalc(measure="ZCOR", ri=ri, ni=ni, data=dat)
@@ -75,7 +77,7 @@ res
 
 ### examine if spatial and/or temporal pooling of data tends to yield larger correlations
 res <- rma.mv(yi, vi,
-   mods = ~ spatially.pooled.data * temporally.pooled.data,
+   mods = ~ spatially.pooled * temporally.pooled,
    random = list(~ 1 | study.id, ~ 1 | effect.size.id, ~ 1 | species.id, ~ 1 | species.id.phy),
    R=list(species.id.phy=A), data=dat)
 res
@@ -93,3 +95,6 @@ predict(res, newmods = rbind(c(0,0,0),c(1,0,0),c(0,1,0),c(1,1,1)), transf=transf
 \concept{multivariate models}
 \concept{phylogeny}
 \concept{meta-regression}
+\section{Concepts}{
+   ecology, evolution, correlation coefficients, multivariate models, phylogeny, meta-regression
+}

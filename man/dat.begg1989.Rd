@@ -3,7 +3,9 @@
 \alias{dat.begg1989}
 \title{Studies on Bone-Marrow Transplantation versus Chemotherapy for the Treatment of Leukemia}
 \description{Results from controlled and uncontrolled studies on the effectiveness of allogeneic bone-marrow transplantation (BMT) and conventional chemotherapy (CMO) in the treatment of acute nonlymphocytic leukemia.}
-\usage{dat.begg1989}
+\usage{
+dat.begg1989
+}
 \format{The data frame contains the following columns:
 \tabular{lll}{
 \bold{study}      \tab \code{numeric}    \tab study number \cr
@@ -36,7 +38,7 @@ dat
 \dontrun{
 
 ### load metafor package
-require(metafor)
+library(metafor)
 
 ### turn trt and arms into factors and set reference levels
 dat$trt  <- relevel(factor(dat$trt), ref="CMO")
@@ -78,3 +80,6 @@ res
 \concept{oncology}
 \concept{single-arm studies}
 \concept{multilevel models}
+\section{Concepts}{
+   medicine, oncology, single-arm studies, multilevel models
+}

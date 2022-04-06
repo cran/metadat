@@ -37,15 +37,15 @@ dat
 \dontrun{
 
 ### load metafor package
-require(metafor)
+library(metafor)
 
 ### meta-analysis of all trials except ISIS-4
-res <- rma(measure="OR", ai=ai, n1i=n1i, ci=ci, n2i=n2i, data=dat, method="FE", subset=-14)
+res <- rma(measure="OR", ai=ai, n1i=n1i, ci=ci, n2i=n2i, data=dat, method="EE", subset=-14)
 print(res, digits=2)
 predict(res, transf=exp, digits=2)
 
 ### meta-analysis of all trials including ISIS-4
-res <- rma(measure="OR", ai=ai, n1i=n1i, ci=ci, n2i=n2i, data=dat, method="FE")
+res <- rma(measure="OR", ai=ai, n1i=n1i, ci=ci, n2i=n2i, data=dat, method="EE")
 print(res, digits=2)
 predict(res, transf=exp, digits=2)
 
@@ -59,3 +59,6 @@ funnel(res, refline=0, level=c(90, 95, 99), shade=c("white", "gray", "darkgray")
 \concept{cardiology}
 \concept{odds ratios}
 \concept{publication bias}
+\section{Concepts}{
+   medicine, cardiology, odds ratios, publication bias
+}

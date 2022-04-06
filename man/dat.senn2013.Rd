@@ -3,14 +3,16 @@
 \alias{dat.senn2013}
 \title{Studies on the Effectiveness of Glucose-Lowering Agents}
 \description{Results from 26 trials examining the effectiveness of glucose-lowering agents in patients with type 2 diabetes}
-\usage{dat.senn2013}
+\usage{
+dat.senn2013
+}
 \format{The data frame contains the following columns:
 \tabular{lll}{
 \bold{study}     \tab \code{character} \tab (first) author and year of study \cr
 \bold{ni}        \tab \code{numeric}   \tab sample size of the study arm \cr
 \bold{treatment} \tab \code{character} \tab treatment given \cr
 \bold{comment}   \tab \code{character} \tab whether figures given are based on raw values at outcome or on change from baseline \cr
-\bold{mi}        \tab \code{numeric}   \tab mean score \cr
+\bold{mi}        \tab \code{numeric}   \tab raw mean or mean change \cr
 \bold{sdi}       \tab \code{numeric}   \tab standard deviation
 }
 }
@@ -25,7 +27,7 @@
 \references{
    Law, M., Jackson, D., Turner, R., Rhodes, K., & Viechtbauer, W. (2016). Two new methods to fit models for network meta-analysis with random inconsistency effects. \emph{BMC Medical Research Methodology}, \bold{16}, 87. \verb{https://doi.org/10.1186/s12874-016-0184-5}
 
-   \enc{Rücker}{Ruecker}, G., & Schwarzer, G. (2015). Ranking treatments in frequentist network meta-analysis works without resampling methods. \emph{BMC Medical Research Methodology}, \bold{15}, 58. \verb{https://doi.org/10.1186/s12874-015-0060-8}
+   Rücker, G., & Schwarzer, G. (2015). Ranking treatments in frequentist network meta-analysis works without resampling methods. \emph{BMC Medical Research Methodology}, \bold{15}, 58. \verb{https://doi.org/10.1186/s12874-015-0060-8}
 }
 \author{
    Wolfgang Viechtbauer, \email{wvb@metafor-project.org}, \url{https://www.metafor-project.org}
@@ -38,10 +40,10 @@ dat
 \dontrun{
 
 ### load metafor package
-require(metafor)
+library(metafor)
 
 ### create network graph ('igraph' package must be installed)
-require(igraph, warn.conflicts=FALSE, quietly=TRUE)
+library(igraph, warn.conflicts=FALSE)
 pairs <- data.frame(do.call(rbind,
    sapply(split(dat$treatment, dat$study), function(x) t(combn(x,2)))), stringsAsFactors=FALSE)
 pairs$X1 <- factor(pairs$X1, levels=sort(unique(dat$treatment)))
@@ -192,5 +194,8 @@ cbind(pscore=round(sort(apply(tab, 1, mean, na.rm=TRUE), decreasing=TRUE), 3))
 }
 \keyword{datasets}
 \concept{medicine}
-\concept{mean differences}
+\concept{raw mean differences}
 \concept{network meta-analysis}
+\section{Concepts}{
+   medicine, raw mean differences, network meta-analysis
+}

@@ -43,7 +43,7 @@ dat
 \dontrun{
 
 # load metafor package
-require(metafor)
+library(metafor)
 
 # calculate log odds ratios and corresponding sampling variances
 dat <- escalc(measure="OR", ai=hcq_arm_event, n1i=hcq_arm_total,
@@ -63,3 +63,6 @@ print(res_cq, digits=2)
 \concept{medicine}
 \concept{covid-19}
 \concept{odds ratios}
+\section{Concepts}{
+   medicine, covid-19, odds ratios
+}

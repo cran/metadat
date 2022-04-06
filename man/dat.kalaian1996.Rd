@@ -3,7 +3,9 @@
 \alias{dat.kalaian1996}
 \title{Studies on the Effectiveness of Coaching for the SAT}
 \description{Results from studies examining the effectiveness of coaching on the performance on the Scholastic Aptitude Test (SAT).}
-\usage{dat.kalaian1996}
+\usage{
+dat.kalaian1996
+}
 \format{The data frame contains the following columns:
 \tabular{lll}{
 \bold{id}          \tab \code{numeric}   \tab row (effect) id \cr
@@ -35,12 +37,12 @@
 \examples{
 ### copy data into 'dat' and examine data
 dat <- dat.kalaian1996
-dat
+head(dat, 12)
 
 \dontrun{
 
 ### load metafor package
-require(metafor)
+library(metafor)
 
 ### check ranges
 range(dat$yi[dat$outcome == "verbal"]) # -0.35 to 0.74 according to page 230
@@ -59,15 +61,9 @@ plot(log(dat$hrs[dat$outcome == "math"]), dat$yi[dat$outcome == "math"],
 abline(h=c(-0.5,0,0.5), lty="dotted")
 abline(v=log(c(5,18)),  lty="dotted")
 
-### construct variance-covariance matrices assuming rho = 0.66
-vcalc <- function(v, rho) {
-   S <- diag(sqrt(v), nrow=length(v), ncol=length(v))
-   R <- matrix(rho, nrow=length(v), ncol=length(v))
-   diag(R) <- 1
-   S \%*\% R \%*\% S
-}
-V <- lapply(split(dat$v, dat$study), vcalc, rho=0.66)
-V <- bldiag(V, order=dat$study)
+### construct variance-covariance matrix assuming rho = 0.66 for effect sizes
+### corresponding to the 'verbal' and 'math' outcome types
+V <- vcalc(vi, cluster=study, type=outcome, data=dat, rho=0.66)
 
 ### fit multivariate random-effects model
 res <- rma.mv(yi, V, mods = ~ outcome - 1,
@@ -100,3 +96,6 @@ res
 \concept{standardized mean differences}
 \concept{multivariate models}
 \concept{meta-regression}
+\section{Concepts}{
+   education, standardized mean differences, multivariate models, meta-regression
+}

@@ -3,7 +3,9 @@
 \alias{dat.landenberger2005}
 \title{Studies on the Effectiveness of CBT for Reducing Recidivism}
 \description{Results from 58 studies on the effectiveness of cognitive-behavioral therapy (CBT) for reducing recidivism in juvenile and adult offenders.}
-\usage{dat.landenberger2005}
+\usage{
+dat.landenberger2005
+}
 \format{The data frame contains the following columns:
 \tabular{lll}{
 \bold{study}            \tab \code{character} \tab (first) author and year \cr
@@ -62,7 +64,7 @@ head(dat)
 \dontrun{
 
 ### load metafor package
-require(metafor)
+library(metafor)
 
 ### calculate log odds ratios (for non-recidivism in CBT vs. control groups) and sampling variances
 dat <- escalc(measure="OR", ai=n.cbt.non, bi=n.cbt.rec, ci=n.ctrl.non, di=n.ctrl.rec, data=dat)
@@ -71,7 +73,7 @@ dat <- escalc(measure="OR", ai=n.cbt.non, bi=n.cbt.rec, ci=n.ctrl.non, di=n.ctrl
 res <- rma(yi, vi, data=dat)
 res
 
-### estimated average OR and corresponding 95% CI/PI
+### estimated average OR and corresponding 95\% CI/PI
 predict(res, transf=exp, digits=2)
 
 ### examine if number of treatment sessions per week is a potential moderator
@@ -88,3 +90,6 @@ predict(res, newmods=c(1,2,5,10), transf=exp, digits=2)
 \concept{criminology}
 \concept{odds ratios}
 \concept{meta-regression}
+\section{Concepts}{
+   psychology, criminology, odds ratios, meta-regression
+}

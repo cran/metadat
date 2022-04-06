@@ -3,7 +3,9 @@
 \alias{dat.crede2010}
 \title{Studies on the Relationship between Class Attendance and Grades in College Students}
 \description{Results from 68 studies on the relationship between class attendence and class performance and/or grade point average in college students.}
-\usage{dat.crede2010}
+\usage{
+dat.crede2010
+}
 \format{The data frame contains the following columns:
 \tabular{lll}{
 \bold{studyid}   \tab \code{numeric}   \tab study number \cr
@@ -38,7 +40,7 @@ head(dat, 18)
 \dontrun{
 
 ### load metafor package
-require(metafor)
+library(metafor)
 
 ### calculate r-to-z transformed correlations and corresponding sampling variances
 dat <- escalc(measure="ZCOR", ri=ri, ni=ni, data=dat)
@@ -94,3 +96,6 @@ predict(res, transf=transf.ztor, digits=2)
 \concept{education}
 \concept{correlation coefficients}
 \concept{multilevel models}
+\section{Concepts}{
+   education, correlation coefficients, multilevel models
+}

@@ -3,7 +3,9 @@
 \alias{dat.linde2005}
 \title{Studies on the Effectiveness of St. John's Wort for Treating Depression}
 \description{Results from 26 studies on the effectiveness of Hypericum perforatum extracts (St. John's wort) for treating depression.}
-\usage{dat.linde2005}
+\usage{
+dat.linde2005
+}
 \format{The data frame contains the following columns:
 \tabular{lll}{
 \bold{id}       \tab \code{numeric}   \tab study number \cr
@@ -64,7 +66,7 @@ head(dat)
 \dontrun{
 
 ### load metafor package
-require(metafor)
+library(metafor)
 
 ### remove studies with no response information and study with no responses in either group
 dat <- dat[-c(5,6,26),]
@@ -90,3 +92,6 @@ predict(res, newmods=diag(4), transf=exp, digits=2)
 \concept{medicine}
 \concept{psychiatry}
 \concept{risk ratios}
+\section{Concepts}{
+   medicine, psychiatry, risk ratios
+}

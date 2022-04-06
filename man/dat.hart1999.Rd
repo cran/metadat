@@ -3,7 +3,9 @@
 \alias{dat.hart1999}
 \title{Studies on the Effectiveness of Warfarin for Preventing Strokes}
 \description{Results from 6 clinical trials examining the effectiveness of adjusted-dose warfarin for preventing strokes in patients with atrial fibrillation.}
-\usage{dat.hart1999}
+\usage{
+dat.hart1999
+}
 \format{The data frame contains the following columns:
 \tabular{lll}{
 \bold{trial}    \tab \code{numeric}   \tab trial number \cr
@@ -37,7 +39,7 @@ dat
 \dontrun{
 
 ### load metafor package
-require(metafor)
+library(metafor)
 
 ### calculate log incidence rate ratios and corresponding sampling variances
 dat <- escalc(measure="IRR", x1i=x1i, x2i=x2i, t1i=t1i, t2i=t2i, data=dat)
@@ -53,9 +55,9 @@ predict(res, transf=exp)
 ### forest plot with extra annotations
 par(mar=c(5,4,1,2))
 forest(res, xlim=c(-11, 5), at=log(c(.05, .25, 1, 4)), atransf=exp,
-       slab=paste0(dat$study, " (", dat$year, ")"),
-       ilab=cbind(paste(dat$x1i, "/", dat$t1i, sep=" "),
-       paste(dat$x2i, "/", dat$t2i, sep=" ")),
+       slab=paste0(study, " (", year, ")"),
+       ilab=cbind(paste(x1i, "/", t1i, sep=" "),
+                  paste(x2i, "/", t2i, sep=" ")),
        ilab.xpos=c(-6.5,-4), cex=.85, header="Study (Year)")
 op <- par(cex=.85, font=2)
 text(c(-6.5,-4), 8.5, c("Warfarin", "Control"))
@@ -73,3 +75,6 @@ res
 \concept{medicine}
 \concept{cardiology}
 \concept{incidence rates}
+\section{Concepts}{
+   medicine, cardiology, incidence rates
+}

@@ -3,7 +3,9 @@
 \alias{dat.bourassa1996}
 \title{Studies on the Association between Handedness and Eye-Dominance}
 \description{Results from 47 studies on the association between handedness and eye-dominance. \loadmathjax}
-\usage{dat.bourassa1996}
+\usage{
+dat.bourassa1996
+}
 \format{The data frame contains the following columns:
 \tabular{lll}{
 \bold{study}        \tab \code{numeric}   \tab study number \cr
@@ -43,11 +45,11 @@ head(dat, 10)
 \dontrun{
 
 ### load metafor package
-require(metafor)
+library(metafor)
 
 ### calculate log(OR) and corresponding sampling variance with 1/2 correction
 dat <- escalc(measure="OR", ai=lh.le, bi=lh.re, ci=rh.le, di=rh.re, data=dat, add=1/2, to="all")
-dat
+head(dat, 10)
 
 ### overall association between handedness and eyedness
 res <- rma(yi, vi, data=dat, subset=sex=="combined")
@@ -59,3 +61,6 @@ predict(res, transf=exp, digits=2)
 \keyword{datasets}
 \concept{psychology}
 \concept{odds ratios}
+\section{Concepts}{
+   psychology, odds ratios
+}

@@ -3,7 +3,9 @@
 \alias{dat.hasselblad1998}
 \title{Studies on the Effectiveness of Counseling for Smoking Cessation}
 \description{Results from 24 studies on the effectiveness of various counseling types for smoking cessation.}
-\usage{dat.hasselblad1998}
+\usage{
+dat.hasselblad1998
+}
 \format{The data frame contains the following columns:
 \tabular{lll}{
 \bold{id}         \tab \code{numeric}    \tab id number for each treatment arm \cr
@@ -41,10 +43,10 @@ dat
 \dontrun{
 
 ### load metafor package
-require(metafor)
+library(metafor)
 
 ### create network graph ('igraph' package must be installed)
-require(igraph, warn.conflicts=FALSE, quietly=TRUE)
+library(igraph, warn.conflicts=FALSE)
 pairs <- data.frame(do.call(rbind,
    sapply(split(dat$trt, dat$study), function(x) t(combn(x,2)))), stringsAsFactors=FALSE)
 lvls <- c("no_contact", "self_help", "ind_counseling", "grp_counseling")
@@ -103,7 +105,7 @@ dat
 ### calculate the variance-covariance matrix of the log odds ratios for multitreatment studies
 ### see Gleser & Olkin (2009), equation (19.11), for the covariance equation
 calc.v <- function(x) {
-   v <- matrix(1/(x$xi.2[1]+1/2) + 1/(x$ni.2[1] - x$xi.2[1] + 1/2), nrow=nrow(x), ncol=nrow(x))
+   v <- matrix(1/(x$xi.2[1] + 1/2) + 1/(x$ni.2[1] - x$xi.2[1] + 1/2), nrow=nrow(x), ncol=nrow(x))
    diag(v) <- x$vi
    v
 }
@@ -132,5 +134,9 @@ res
 \keyword{datasets}
 \concept{medicine}
 \concept{psychology}
+\concept{smoking}
 \concept{odds ratios}
 \concept{network meta-analysis}
+\section{Concepts}{
+   medicine, psychology, smoking, odds ratios, network meta-analysis
+}

@@ -50,7 +50,7 @@ dat
 \dontrun{
 
 ### load metafor package
-require(metafor)
+library(metafor)
 
 ### calculate log risk ratios and corresponding sampling variances
 dat <- escalc(measure="RR", ai=tpos, bi=tneg, ci=cpos, di=cneg, data=dat)
@@ -74,8 +74,8 @@ predict(res, newmods=cbind(seq(from=10, to=60, by=10), 1970), transf=exp)
 ### note: the interpretation of the results is difficult because absolute
 ### latitude and publication year are strongly correlated (the more recent
 ### studies were conducted closer to the equator)
-plot(dat$year, dat$ablat, pch=19, xlab="Publication Year", ylab="Absolute Lattitude")
-cor(dat$year, dat$ablat)
+plot(ablat ~ year, data=dat, pch=19, xlab="Publication Year", ylab="Absolute Lattitude")
+cor(dat$ablat, dat$year)
 
 }
 }
@@ -83,3 +83,6 @@ cor(dat$year, dat$ablat)
 \concept{medicine}
 \concept{risk ratios}
 \concept{meta-regression}
+\section{Concepts}{
+   medicine, risk ratios, meta-regression
+}

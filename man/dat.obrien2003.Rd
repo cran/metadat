@@ -3,7 +3,9 @@
 \alias{dat.obrien2003}
 \title{Studies on the Relationship Between BMI and Risk of Preeclampsia}
 \description{Results from 13 studies on the relationship between maternal body mass index (BMI) and the risk of preeclampsia.}
-\usage{dat.obrien2003}
+\usage{
+dat.obrien2003
+}
 \format{The data frame contains the following columns:
 \tabular{lll}{
 \bold{study}      \tab \code{numeric}    \tab study id \cr
@@ -37,16 +39,16 @@ dat
 \dontrun{
 
 ### load metafor package
-require(metafor)
+library(metafor)
 
 ### restructure the data into a wide format
 dat2 <- to.wide(dat, study="study", grp="grp", ref=1, grpvars=c("bmi","cases","total"),
                 addid=FALSE, adddesign=FALSE, postfix=c(1,2))
-dat2
+dat2[1:10, -c(2:3)]
 
 ### calculate log risk ratios and corresponding sampling variances
 dat2 <- escalc(measure="RR", ai=cases1, n1i=total1, ci=cases2, n2i=total2, data=dat2)
-dat2
+dat2[1:10, -c(2:7)]
 
 ### forest plot of the risk ratios
 dd <- c(0,diff(dat2$study))
@@ -61,7 +63,7 @@ with(dat2, forest(yi, vi, header=TRUE, slab=slabs, xlim=c(-7,5.5), fonts="mono",
 text(-4.4, max(rows)+2, "Comparison", font=2, cex=0.8, pos=4)
 
 ### within-study mean center the BMI variable
-dat$bmicent <- dat$bmi - ave(dat$bmi, dat$study)
+dat$bmicent <- with(dat, bmi - ave(bmi, study))
 
 ### compute the proportion of preeclampsia cases and corresponding sampling variances
 dat <- escalc(measure="PR", xi=cases, ni=total, data=dat)
@@ -69,6 +71,7 @@ dat <- escalc(measure="PR", xi=cases, ni=total, data=dat)
 ### convert the proportions to percentages (and convert the variances accordingly)
 dat$yi <- dat$yi*100
 dat$vi <- dat$vi*100^2
+dat[1:10, -c(2:3)]
 
 ### fit multilevel meta-regression model to examine the relationship between the
 ### (centered) BMI variable and the risk of preeclampsia
@@ -82,6 +85,33 @@ regplot(res, xlab=expression("Within-Study Mean Centered BMI"~(kg/m^2)),
         at=seq(0,18,by=2), olim=c(0,100), psize=2, bg="gray90",
         label=TRUE, offset=0, labsize=0.6)
 
+### fit model using a random slope for bmicent
+res <- rma.mv(yi, vi, mods = ~ bmicent, random = ~ bmicent | study, struct="GEN", data=dat)
+res
+
+### load rms package
+library(rms)
+
+### fit restricted cubic spline model
+res <- rma.mv(yi, vi, mods = ~ rcs(bmicent, 4), random = ~ 1 | study/grp, data=dat)
+res
+
+### get knot positions
+knots <- attr(rcs(model.matrix(res)[,2], 4), "parms")
+
+### computed predicted values based on the model
+xs <- seq(-10, 10, length=1000)
+sav <- predict(res, newmods=rcspline.eval(xs, knots, inclx=TRUE))
+
+### draw scatterplot with regression line based on the model
+tmp <- regplot(res, mod=2, pred=sav,
+               xvals=xs, xlab=expression("Within-Study Mean Centered BMI"~(kg/m^2)),
+               ylab="Preeclampsia Prevalence (\%)", las=1, bty="l",
+               at=seq(0,18,by=2), olim=c(0,100), psize=2, bg="gray90",
+               label=TRUE, offset=0, labsize=0.6)
+abline(v=knots, lty="dotted")
+points(tmp)
+
 }
 }
 \keyword{datasets}
@@ -91,3 +121,6 @@ regplot(res, xlab=expression("Within-Study Mean Centered BMI"~(kg/m^2)),
 \concept{proportions}
 \concept{multilevel models}
 \concept{dose-response models}
+\section{Concepts}{
+   medicine, obstetrics, risk ratios, proportions, multilevel models, dose-response models
+}

@@ -3,7 +3,9 @@
 \alias{dat.gibson2002}
 \title{Studies on the Effectiveness of Self-Management Education and Regular Medical Review for Adults with Asthma}
 \description{Results from 15 trials examining the effectiveness of self-management education and regular medical review for adults with asthma.}
-\usage{dat.gibson2002}
+\usage{
+dat.gibson2002
+}
 \format{The data frame contains the following columns:
 \tabular{lll}{
 \bold{author}   \tab \code{character} \tab first author of study \cr
@@ -49,26 +51,45 @@ dat
 \dontrun{
 
 ### load metafor package
-require(metafor)
+library(metafor)
 
-### fixed-effects model analysis of the standardized mean differences
+### compute standardized mean differences and corresponding sampling variances
 dat <- escalc(measure="SMD", m1i=m1i, sd1i=sd1i, n1i=n1i, m2i=m2i, sd2i=sd2i, n2i=n2i, data=dat)
-res <- rma(yi, vi, data=dat, method="FE")
+dat
+
+### fit an equal-effects model to the standardized mean differences (as in Gibson et al., 2002)
+res <- rma(yi, vi, data=dat, method="EE")
 print(res, digits=2)
 
-### fixed-effects model analysis of the (log) risk ratios
+### compute log risk ratios and corresponding sampling variances
 dat <- escalc(measure="RR", ai=ai, bi=bi, ci=ci, di=di, data=dat)
-res <- rma(yi, vi, data=dat, method="FE")
+dat
+
+### fit an equal-effects model to the log risk ratios
+res <- rma(yi, vi, data=dat, method="EE")
 print(res, digits=2)
 predict(res, transf=exp, digits=2)
 
-### fixed-effects model analysis of the standardized mean differences and the probit transformed
-### risk differences (which also provide estimates of the standardized mean difference)
-dat <- escalc(measure="SMD", m1i=m1i, sd1i=sd1i, n1i=n1i, m2i=m2i, sd2i=sd2i, n2i=n2i, data=dat)
-dat <- escalc(measure="PBIT", ai=ai, bi=bi, ci=ci, di=di, data=dat, replace=FALSE)
+### note: Gibson et al. (2002) used the Mantel-Haenszel method for their analysis
+rma.mh(measure="RR", ai=ai, bi=bi, ci=ci, di=di, data=dat, digits=2)
+
+### compute standardized mean differences where possible and otherwise probit transformed
+### risk differences (which also provide estimates of the standardized mean differences)
+dat <- escalc(measure="SMD", m1i=m1i, sd1i=sd1i, n1i=n1i,
+                             m2i=m2i, sd2i=sd2i, n2i=n2i, data=dat, add.measure=TRUE)
+dat <- escalc(measure="PBIT", ai=ai, bi=bi, ci=ci, di=di, data=dat, replace=FALSE, add.measure=TRUE)
 dat
-res <- rma(yi, vi, data=dat, method="FE")
+
+### fit a random-effects model to these estimates
+res <- rma(yi, vi, data=dat)
 print(res, digits=2)
+
+### meta-regression model examining if there are systematic differences based on the
+### type of measure used (there are only 2 studies where measure="PBIT", so this isn't
+### very conclusive here, but shown for illustration purposes)
+res <- rma(yi, vi, mods = ~ measure, data=dat)
+print(res, digits=2)
+predict(res, newmods=1, digits=2)
 
 }
 }
@@ -77,3 +98,6 @@ print(res, digits=2)
 \concept{primary care}
 \concept{risk ratios}
 \concept{standardized mean differences}
+\section{Concepts}{
+   medicine, primary care, risk ratios, standardized mean differences
+}

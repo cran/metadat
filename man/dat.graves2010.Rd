@@ -32,7 +32,7 @@ dat
 \dontrun{
 
 ### load metafor package
-require(metafor)
+library(metafor)
 
 ### analysis using the Mantel-Haenszel method
 rma.mh(measure="RR", ai=ai, n1i=n1i, ci=ci, n2i=n2i, data=dat, digits=2)
@@ -43,3 +43,6 @@ rma.mh(measure="RR", ai=ai, n1i=n1i, ci=ci, n2i=n2i, data=dat, digits=2)
 \concept{medicine}
 \concept{risk ratios}
 \concept{Mantel-Haenszel method}
+\section{Concepts}{
+   medicine, risk ratios, Mantel-Haenszel method
+}

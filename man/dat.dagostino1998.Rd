@@ -3,7 +3,9 @@
 \alias{dat.dagostino1998}
 \title{Studies on the Effectiveness of Antihistamines in Reducing Symptoms of the Common Cold}
 \description{Results from 9 studies on the effectiveness of antihistamines in reducing the severity of runny nose and sneezing in the common cold.}
-\usage{dat.dagostino1998}
+\usage{
+dat.dagostino1998
+}
 \format{The data frame contains the following columns:
 \tabular{lll}{
 \bold{study}    \tab \code{numeric}   \tab study id \cr
@@ -48,7 +50,7 @@ head(dat, 16)
 \dontrun{
 
 ### load metafor package
-require(metafor)
+library(metafor)
 
 ### compute standardized mean differences and corresponding sampling variances
 dat <- escalc(measure="SMD", m1i=mt, m2i=mc, sd1i=sdt, sd2i=sdc, n1i=nt, n2i=nc, data=dat,
@@ -71,13 +73,8 @@ res
 predict(res, transf=exp)
 
 ### construct approximate V matrix assuming a correlation of 0.7 for sampling errors within studies
-V <- lapply(split(dat$vi, dat$study), function(v) {
-   S <- diag(sqrt(v), nrow=length(v), ncol=length(v))
-   R <- matrix(0.7, nrow=length(v), ncol=length(v))
-   diag(R) <- 1
-   S \%*\% R \%*\% S
-})
-V <- bldiag(V, order=dat$study)
+dat$esid <- ave(dat$study, dat$study, FUN=seq)
+V <- vcalc(vi, cluster=study, obs=esid, rho=0.7, data=dat)
 
 ### fit a model for incremental change in runny nose severity at day 1 and at day 2, allowing for
 ### correlated sampling errors (no random effects added, since there does not appear to be any
@@ -95,3 +92,6 @@ anova(res, X=c(1,-1))
 \concept{standardized mean differences}
 \concept{odds ratios}
 \concept{multivariate models}
+\section{Concepts}{
+   medicine, standardized mean differences, odds ratios, multivariate models
+}

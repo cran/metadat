@@ -3,7 +3,9 @@
 \alias{dat.normand1999}
 \title{Studies on the Length of Hospital Stay of Stroke Patients}
 \description{Results from 9 studies on the length of the hospital stay of stroke patients under specialized care and under conventional/routine (non-specialist) care.}
-\usage{dat.normand1999}
+\usage{
+dat.normand1999
+}
 \format{The data frame contains the following columns:
 \tabular{lll}{
 \bold{study}    \tab \code{numeric}   \tab study number \cr
@@ -33,7 +35,7 @@ dat
 \dontrun{
 
 ### load metafor package
-require(metafor)
+library(metafor)
 
 ### calculate mean differences and corresponding sampling variances
 dat <- escalc(measure="MD", m1i=m1i, sd1i=sd1i, n1i=n1i, m2i=m2i, sd2i=sd2i, n2i=n2i, data=dat)
@@ -51,9 +53,21 @@ res
 ### draw forest plot
 forest(res, xlim=c(-7,5), alim=c(-3,1), header="Study/Source")
 
+### calculate (log transformed) ratios of means and corresponding sampling variances
+dat <- escalc(measure="ROM", m1i=m1i, sd1i=sd1i, n1i=n1i, m2i=m2i, sd2i=sd2i, n2i=n2i, data=dat)
+dat
+
+### meta-analysis of the (log transformed) ratios of means using a random-effects model
+res <- rma(yi, vi, data=dat)
+res
+predict(res, transf=exp, digits=2)
+
 }
 }
 \keyword{datasets}
 \concept{medicine}
-\concept{mean differences}
+\concept{raw mean differences}
 \concept{standardized mean differences}
+\section{Concepts}{
+   medicine, raw mean differences, standardized mean differences
+}

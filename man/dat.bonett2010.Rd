@@ -3,7 +3,9 @@
 \alias{dat.bonett2010}
 \title{Studies on the Reliability of the CES-D Scale}
 \description{Results from 9 studies on the reliability of the Center for Epidemiologic Studies Depression (CES-D) Scale administered to children providing care to an elderly parent.}
-\usage{dat.bonett2010}
+\usage{
+dat.bonett2010
+}
 \format{The data frame contains the following columns:
 \tabular{lll}{
 \bold{study}      \tab \code{numeric}    \tab study number \cr
@@ -36,7 +38,7 @@ dat
 \dontrun{
 
 ### load metafor package
-require(metafor)
+library(metafor)
 
 ### meta-analysis using the raw alpha values
 res <- rma(measure="ARAW", ai=ai, mi=mi, ni=ni, data=dat)
@@ -55,7 +57,7 @@ res
 predict(res, transf=transf.iabt)
 
 ### forest plot
-forest(res, slab=dat$source, header=TRUE, atransf=transf.iabt, refline=coef(res))
+forest(res, slab=source, header=TRUE, atransf=transf.iabt, refline=coef(res))
 
 ### examine whether female/mixed samples yield different alphas (with raw alphas)
 res <- rma(measure="ARAW", ai=ai, mi=mi, ni=ni, mods = ~ caregivers, data=dat)
@@ -69,3 +71,6 @@ predict(res, newmods=c(0,1), digits=2)
 \concept{Cronbach's alpha}
 \concept{reliability generalization}
 \concept{meta-regression}
+\section{Concepts}{
+   psychology, Cronbach's alpha, reliability generalization, meta-regression
+}

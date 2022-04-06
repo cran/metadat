@@ -3,7 +3,9 @@
 \alias{dat.craft2003}
 \title{Studies on the Relationship between the Competitive State Anxiety Inventory-2 and Sport Performance}
 \description{Results from 10 studies on the relationship between the Competitive State Anxiety Inventory-2 (CSAI-2) and sport performance.}
-\usage{dat.craft2003}
+\usage{
+dat.craft2003
+}
 \format{The data frame contains the following columns:
 \tabular{lll}{
 \bold{study} \tab \code{numeric}   \tab study number \cr
@@ -31,12 +33,12 @@
 \examples{
 ### copy data into 'dat' and examine data
 dat <- dat.craft2003
-dat
+head(dat, 18)
 
 \dontrun{
 
 ### load metafor package
-require(metafor)
+library(metafor)
 
 ### construct dataset and var-cov matrix of the correlations
 tmp <- rcalc(ri ~ var1 + var2 | study, ni=ni, data=dat)
@@ -65,3 +67,6 @@ res
 \concept{psychology}
 \concept{correlation coefficients}
 \concept{multivariate models}
+\section{Concepts}{
+   psychology, correlation coefficients, multivariate models
+}

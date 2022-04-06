@@ -3,7 +3,9 @@
 \alias{dat.assink2016}
 \title{Studies on the Association between Recidivism and Mental Health}
 \description{Results from 17 studies on the association between recidivism and mental health in delinquent juveniles.}
-\usage{dat.assink2016}
+\usage{
+dat.assink2016
+}
 \format{The data frame contains the following columns:
 \tabular{lll}{
 \bold{study}     \tab \code{numeric}   \tab study id number \cr
@@ -36,19 +38,19 @@
 \examples{
 ### copy data into 'dat' and examine data
 dat <- dat.assink2016
-dat
+head(dat, 9)
 
 \dontrun{
 
 ### load metafor package
-require(metafor)
+library(metafor)
 
 ### fit multilevel model
 res <- rma.mv(yi, vi, random = ~ 1 | study/esid, data=dat)
 res
 
 ### use cluster-robust inference methods
-robust(res, cluster=dat$study)
+robust(res, cluster=study)
 
 ### LRTs for the variance components
 res0 <- rma.mv(yi, vi, random = ~ 1 | study/esid, data=dat, sigma2=c(0,NA))
@@ -59,10 +61,20 @@ anova(res0, res)
 ### examine some potential moderators via meta-regression
 rma.mv(yi, vi, mods = ~ pubstatus, random = ~ 1 | study/esid, data=dat)
 rma.mv(yi, vi, mods = ~ year, random = ~ 1 | study/esid, data=dat)
-dat$deltype <- factor(dat$deltype)
-dat$deltype <- relevel(dat$deltype, ref="general")
+dat$deltype <- relevel(factor(dat$deltype), ref="general")
 rma.mv(yi, vi, mods = ~ deltype, random = ~ 1 | study/esid, data=dat)
 rma.mv(yi, vi, mods = ~ year + deltype, random = ~ 1 | study/esid, data=dat)
+
+### assume that the effect sizes within studies are correlated with rho=0.6
+V <- vcalc(vi, cluster=study, obs=esid, data=dat, rho=0.6)
+round(V[dat$study \%in\% c(1,2), dat$study \%in\% c(1,2)], 4)
+
+### fit multilevel model using this approximate V matrix
+res <- rma.mv(yi, V, random = ~ 1 | study/esid, data=dat)
+res
+
+### use cluster-robust inference methods
+robust(res, cluster=study)
 
 }
 }
@@ -72,3 +84,6 @@ rma.mv(yi, vi, mods = ~ year + deltype, random = ~ 1 | study/esid, data=dat)
 \concept{standardized mean differences}
 \concept{multilevel models}
 \concept{cluster-robust inference}
+\section{Concepts}{
+   psychology, criminology, standardized mean differences, multilevel models, cluster-robust inference
+}

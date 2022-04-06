@@ -52,7 +52,7 @@ dat
 \dontrun{
 
 ### load metafor package
-require(metafor)
+library(metafor)
 
 ### meta-analysis of trials 1-7 using Peto's method (as in Teo et al., 1991)
 res <- rma.peto(ai=ai, n1i=n1i, ci=ci, n2i=n2i, data=dat, subset=1:7)
@@ -82,3 +82,6 @@ funnel(res, refline=0, level=c(90, 95, 99), shade=c("white", "gray", "darkgray")
 \concept{cardiology}
 \concept{Peto's method}
 \concept{publication bias}
+\section{Concepts}{
+   medicine, cardiology, Peto's method, publication bias
+}

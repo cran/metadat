@@ -3,7 +3,9 @@
 \alias{dat.lopez2019}
 \title{Studies on the Effectiveness of CBT for Depression}
 \description{Results from 76 studies examining the effectiveness of cognitive behavioral therapy (CBT) for depression in adults.}
-\usage{dat.lopez2019}
+\usage{
+dat.lopez2019
+}
 \format{The data frame contains the following columns:
 \tabular{lll}{
 \bold{study}     \tab \code{character} \tab (first) author and year of study \cr
@@ -63,10 +65,10 @@ dat[1:10,1:6]
 \dontrun{
 
 ### load metafor package
-require(metafor)
+library(metafor)
 
 ### create network graph ('igraph' package must be installed)
-require(igraph, warn.conflicts=FALSE, quietly=TRUE)
+library(igraph, warn.conflicts=FALSE)
 pairs <- data.frame(do.call(rbind,
    sapply(split(dat$treatment, dat$study), function(x) t(combn(x,2)))), stringsAsFactors=FALSE)
 pairs$X1 <- factor(pairs$X1, levels=sort(unique(dat$treatment)))
@@ -121,5 +123,8 @@ res
 }
 \keyword{datasets}
 \concept{psychiatry}
-\concept{standardized mean change}
+\concept{standardized mean changes}
 \concept{network meta-analysis}
+\section{Concepts}{
+   psychiatry, standardized mean changes, network meta-analysis
+}

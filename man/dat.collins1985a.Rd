@@ -3,7 +3,9 @@
 \alias{dat.collins1985a}
 \title{Studies on the Treatment of Upper Gastrointestinal Bleeding by a Histamine H2 Antagonist}
 \description{Results from studies examining the effectiveness of histamine H2 antagonists (cimetidine or ranitidine) in treating patients with acute upper gastrointestinal hemorrhage.}
-\usage{dat.collins1985a}
+\usage{
+dat.collins1985a
+}
 \format{The data frame contains the following columns:
 \tabular{lll}{
 \bold{id}    \tab \code{numeric}   \tab study number \cr
@@ -42,7 +44,7 @@ dat
 \dontrun{
 
 ### load metafor package
-require(metafor)
+library(metafor)
 
 ### meta-analysis of log ORs using Peto's method (outcome: persistent or recurrent bleedings)
 res <- rma.peto(ai=b.xti, n1i=nti, ci=b.xci, n2i=nci, data=dat)
@@ -79,3 +81,6 @@ print(res, digits=2)
 \concept{odds ratios}
 \concept{Peto's method}
 \concept{generalized linear models}
+\section{Concepts}{
+   medicine, odds ratios, Peto's method, generalized linear models
+}

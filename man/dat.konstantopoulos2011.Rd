@@ -3,7 +3,9 @@
 \alias{dat.konstantopoulos2011}
 \title{Studies on the Effects of Modified School Calendars on Student Achievement}
 \description{Results from 56 studies on the effects of modified school calendars on student achievement.}
-\usage{dat.konstantopoulos2011}
+\usage{
+dat.konstantopoulos2011
+}
 \format{The data frame contains the following columns:
 \tabular{lll}{
 \bold{district} \tab \code{numeric}   \tab district id number \cr
@@ -38,7 +40,7 @@ dat
 \dontrun{
 
 ### load metafor package
-require(metafor)
+library(metafor)
 
 ### regular random-effects model
 res <- rma(yi, vi, data=dat)
@@ -56,7 +58,7 @@ print(res.ml, digits=3)
 profile(res.ml, progbar=FALSE)
 
 ### multivariate parameterization of the model
-res.mv <- rma.mv(yi, vi, random = ~ factor(school) | district, data=dat)
+res.mv <- rma.mv(yi, vi, random = ~ school | district, data=dat)
 print(res.mv, digits=3)
 
 ### tau^2 from multivariate model = sum of the two variance components from the multilevel model
@@ -71,3 +73,6 @@ round(res.ml$sigma2[1] / sum(res.ml$sigma2), 3)
 \concept{education}
 \concept{standardized mean differences}
 \concept{multilevel models}
+\section{Concepts}{
+   education, standardized mean differences, multilevel models
+}

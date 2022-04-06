@@ -3,7 +3,9 @@
 \alias{dat.bangertdrowns2004}
 \title{Studies on the Effectiveness of Writing-to-Learn Interventions}
 \description{Results from 48 studies on the effectiveness of school-based writing-to-learn interventions on academic achievement. \loadmathjax}
-\usage{dat.bangertdrowns2004}
+\usage{
+dat.bangertdrowns2004
+}
 \format{The data frame contains the following columns:
 \tabular{lll}{
 \bold{id}       \tab \code{numeric}   \tab study number \cr
@@ -38,12 +40,12 @@
 \examples{
 ### copy data into 'dat' and examine data
 dat <- dat.bangertdrowns2004
-dat
+dat[1:10,-13]
 
 \dontrun{
 
 ### load metafor package
-require(metafor)
+library(metafor)
 
 ### fit random-effects model
 res <- rma(yi, vi, data=dat)
@@ -63,3 +65,6 @@ res
 \concept{education}
 \concept{standardized mean differences}
 \concept{meta-regression}
+\section{Concepts}{
+   education, standardized mean differences, meta-regression
+}

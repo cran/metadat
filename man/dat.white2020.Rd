@@ -3,7 +3,9 @@
 \alias{dat.white2020}
 \title{Studies on the Relationship between Sexual Signal Expression and Individual Quality}
 \description{Results from 41 studies examining the relationship between measures of individual quality and the expression of structurally coloured sexual signals.}
-\usage{dat.white2020}
+\usage{
+dat.white2020
+}
 \format{
 The object is a data frame which contains the following columns:
 \tabular{lll}{
@@ -41,7 +43,7 @@ head(dat, 10)
 \dontrun{
 
 ### load metafor package
-require(metafor)
+library(metafor)
 
 ### calculate r-to-z transformed correlations and corresponding sampling variances
 dat <- escalc(measure="ZCOR", ri=r, ni=n, data=dat)
@@ -56,3 +58,6 @@ res
 \concept{ecology}
 \concept{evolution}
 \concept{correlation coefficients}
+\section{Concepts}{
+   ecology, evolution, correlation coefficients
+}

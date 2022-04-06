@@ -48,7 +48,7 @@ dmat[1:5,1:5]
 \dontrun{
 
 ### load metafor package
-require(metafor)
+library(metafor)
 
 ### fit a standard random-effects model ignoring spatial correlation
 res1 <- rma.mv(s1, vars1, random = ~ 1 | site_station, data=dat)
@@ -84,3 +84,6 @@ profile(res2, rho=1, xlim=c(0,200), steps=100)
 \concept{ecology}
 \concept{climate change}
 \concept{spatial correlation}
+\section{Concepts}{
+   ecology, climate change, spatial correlation
+}

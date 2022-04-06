@@ -3,7 +3,9 @@
 \alias{dat.fine1993}
 \title{Studies on Radiation Therapy with or without Adjuvant Chemotherapy in Patients with Malignant Gliomas}
 \description{Results from 17 trials comparing post-operative radiation therapy with and without adjuvant chemotherapy in patients with malignant gliomas.}
-\usage{dat.fine1993}
+\usage{
+dat.fine1993
+}
 \format{The data frame contains the following columns:
 \tabular{lll}{
 \bold{study}      \tab \code{numeric}    \tab study number \cr
@@ -43,7 +45,7 @@ dat
 \dontrun{
 
 ### load metafor package
-require(metafor)
+library(metafor)
 
 ### calculate log(ORs) and sampling variances for each time point
 dat <- escalc(measure="OR", ai=e1i, n1i=nei, ci=c1i, n2i=nci, data=dat, var.names=c("y1i","v1i"))
@@ -124,3 +126,6 @@ profile(res, rho=1)
 \concept{oncology}
 \concept{odds ratios}
 \concept{longitudinal models}
+\section{Concepts}{
+   medicine, oncology, odds ratios, longitudinal models
+}

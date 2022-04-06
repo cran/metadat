@@ -3,7 +3,9 @@
 \alias{dat.baskerville2012}
 \title{Studies on the Effectiveness of Practice Facilitation Interventions}
 \description{Results from 23 studies on the effectiveness of practice facilitation interventions within the primary care practice setting.}
-\usage{dat.baskerville2012}
+\usage{
+dat.baskerville2012
+}
 \format{The data frame contains the following columns:
 \tabular{lll}{
 \bold{author}    \tab \code{character} \tab study author(s) \cr
@@ -43,7 +45,7 @@ dat
 \dontrun{
 
 ### load metafor package
-require(metafor)
+library(metafor)
 
 ### random-effects model
 res <- rma(smd, sei=se, data=dat, method="DL")
@@ -74,3 +76,6 @@ rma(smd, sei=se, mods = ~ I(meetings * hours), data=dat, method="DL")
 \concept{standardized mean differences}
 \concept{publication bias}
 \concept{meta-regression}
+\section{Concepts}{
+   medicine, primary care, standardized mean differences, publication bias, meta-regression
+}

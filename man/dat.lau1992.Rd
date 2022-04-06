@@ -3,7 +3,9 @@
 \alias{dat.lau1992}
 \title{Studies on Intravenous Streptokinase for Acute Myocardial Infarction}
 \description{Results from 33 trials comparing intravenous streptokinase versus placebo or no therapy in patients who had been hospitalized for acute myocardial infarction.}
-\usage{dat.lau1992}
+\usage{
+dat.lau1992
+}
 \format{The data frame contains the following columns:
 \tabular{lll}{
 \bold{trial} \tab \code{character} \tab trial name \cr
@@ -31,7 +33,7 @@ dat
 \dontrun{
 
 ### load metafor package
-require(metafor)
+library(metafor)
 
 ### meta-analysis of log odds ratios using the MH method
 res <- rma.mh(measure="OR", ai=ai, n1i=n1i, ci=ci, n2i=n2i, data=dat, slab=trial)
@@ -60,3 +62,6 @@ text(1.1, (res$k:1)[id], paste0("z = ", formatC(sav$zval[id], format="f", digits
 \concept{cardiology}
 \concept{odds ratios}
 \concept{cumulative meta-analysis}
+\section{Concepts}{
+   medicine, cardiology, odds ratios, cumulative meta-analysis
+}

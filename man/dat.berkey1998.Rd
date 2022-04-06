@@ -3,7 +3,9 @@
 \alias{dat.berkey1998}
 \title{Studies on Treatments for Periodontal Disease}
 \description{Results from 5 trials comparing surgical and non-surgical treatments for medium-severity periodontal disease one year after treatment. \loadmathjax}
-\usage{dat.berkey1998}
+\usage{
+dat.berkey1998
+}
 \format{The data frame contains the following columns:
 \tabular{lll}{
 \bold{trial}      \tab \code{numeric}    \tab trial number \cr
@@ -38,13 +40,10 @@ dat
 \dontrun{
 
 ### load metafor package
-require(metafor)
+library(metafor)
 
-### construct list with the variance-covariance matrices of the observed outcomes for the studies
-V <- lapply(split(dat[c("v1i", "v2i")], dat$trial), as.matrix)
-
-### construct block diagonal matrix
-V <- bldiag(V)
+### construct block diagonal var-cov matrix of the observed outcomes based on variables v1i and v2i
+V <- vcalc(vi=1, cluster=author, rvars=c(v1i, v2i), data=dat)
 
 ### fit multiple outcomes (meta-regression) model (with REML estimation)
 res <- rma.mv(yi, V, mods = ~ outcome - 1, random = ~ outcome | trial, struct="UN", data=dat)
@@ -63,5 +62,8 @@ print(res, digits=3)
 \keyword{datasets}
 \concept{medicine}
 \concept{dentistry}
-\concept{mean differences}
+\concept{raw mean differences}
 \concept{multivariate models}
+\section{Concepts}{
+   medicine, dentistry, raw mean differences, multivariate models
+}

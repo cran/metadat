@@ -3,7 +3,9 @@
 \alias{dat.pignon2000}
 \title{Studies on the Effectiveness of Locoregional Treatment plus Chemotherapy for Head and Neck Squamous-Cell Carcinoma}
 \description{Results from studies examining mortality risk in patients with nonmetastatic head and neck squamous-cell carcinoma receiving either locoregional treatment plus chemotherapy versus locoregional treatment alone.}
-\usage{dat.pignon2000}
+\usage{
+dat.pignon2000
+}
 \format{The data frame contains the following columns:
 \tabular{lll}{
 \bold{id}         \tab \code{numeric}    \tab study id number \cr
@@ -32,7 +34,7 @@ head(dat)
 \dontrun{
 
 ### load metafor package
-require(metafor)
+library(metafor)
 
 ### calculate log hazard ratios and sampling variances
 dat$yi <- with(dat, OmE/V)
@@ -40,22 +42,22 @@ dat$vi <- with(dat, 1/V)
 head(dat)
 
 ### meta-analysis based on all 65 trials
-res <- rma(yi, vi, data=dat, method="FE", digits=2)
+res <- rma(yi, vi, data=dat, method="EE", digits=2)
 res
 predict(res, transf=exp)
 
 ### only adjuvant trials
-res <- rma(yi, vi, data=dat, method="FE", subset=grp==1, digits=2)
+res <- rma(yi, vi, data=dat, method="EE", subset=grp==1, digits=2)
 res
 predict(res, transf=exp)
 
 ### only neoadjuvant trials
-res <- rma(yi, vi, data=dat, method="FE", subset=grp==2, digits=2)
+res <- rma(yi, vi, data=dat, method="EE", subset=grp==2, digits=2)
 res
 predict(res, transf=exp)
 
 ### only concomitant trials
-res <- rma(yi, vi, data=dat, method="FE", subset=grp==3, digits=2)
+res <- rma(yi, vi, data=dat, method="EE", subset=grp==3, digits=2)
 res
 predict(res, transf=exp)
 
@@ -65,3 +67,6 @@ predict(res, transf=exp)
 \concept{medicine}
 \concept{oncology}
 \concept{hazard ratios}
+\section{Concepts}{
+   medicine, oncology, hazard ratios
+}

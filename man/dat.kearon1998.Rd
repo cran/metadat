@@ -1,8 +1,8 @@
 \name{dat.kearon1998}
 \docType{data}
 \alias{dat.kearon1998}
-\title{Studies on the Accuracy of Venous Ultrasonography for the Diagonosis of Deep Venous Thrombosis}
-\description{Results from diagnostic accuracy studies examining the accuracy of venous ultrasonography for the diagonosis of deep venous thrombosis.}
+\title{Studies on the Accuracy of Venous Ultrasonography for the Diagnosis of Deep Venous Thrombosis}
+\description{Results from diagnostic accuracy studies examining the accuracy of venous ultrasonography for the diagnosis of deep venous thrombosis.}
 \usage{
 dat.kearon1998
 }
@@ -40,7 +40,7 @@ head(dat)
 \dontrun{
 
 ### load metafor package
-require(metafor)
+library(metafor)
 
 ### calculate diagnostic log odds ratios and corresponding sampling variances
 dat <- escalc(measure="OR", ai=tp, n1i=np, ci=nn-tn, n2i=nn, data=dat, add=1/2, to="all")
@@ -54,7 +54,7 @@ res
 res <- rma(yi, vi, data=dat, subset=patients=="asymptomatic")
 res
 
-### estimated average diagnostic odds ratio (with 95% CI)
+### estimated average diagnostic odds ratio (with 95\% CI)
 predict(res, transf=exp, digits=2)
 
 ### regression test for funnel plot asymmetry using SE as predictor
@@ -122,3 +122,6 @@ predict(res, newmods = c(1,1), transf=exp, digits=2)
 \concept{diagnostic accuracy studies}
 \concept{multivariate models}
 \concept{publication bias}
+\section{Concepts}{
+   medicine, odds ratios, diagnostic accuracy studies, multivariate models, publication bias
+}

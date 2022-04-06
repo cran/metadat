@@ -3,7 +3,9 @@
 \alias{dat.raudenbush1985}
 \title{Studies on Assessing the Effects of Teacher Expectations on Pupil IQ}
 \description{Results from 19 studies examining how teachers' expectations about their pupils can influence actual IQ levels.}
-\usage{dat.raudenbush1985}
+\usage{
+dat.raudenbush1985
+}
 \format{The data frame contains the following columns:
 \tabular{lll}{
 \bold{study}      \tab \code{numeric}    \tab study number \cr
@@ -43,14 +45,14 @@ dat
 \dontrun{
 
 ### load metafor package
-require(metafor)
+library(metafor)
 
 ### random-effects model
 res <- rma(yi, vi, data = dat)
 res
 
 ### create weeks variable where values larger than 3 are set to 3
-dat$weeks.c <- ifelse(dat$week > 3, 3, dat$week)
+dat$weeks.c <- ifelse(dat$weeks > 3, 3, dat$weeks)
 
 ### mixed-effects model with weeks.c variable as moderator
 res <- rma(yi, vi, mods = ~ weeks.c, data = dat, digits = 3)
@@ -62,3 +64,6 @@ res
 \concept{education}
 \concept{standardized mean differences}
 \concept{meta-regression}
+\section{Concepts}{
+   education, standardized mean differences, meta-regression
+}
