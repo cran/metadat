@@ -6,7 +6,8 @@
 \usage{
 dat.mccurdy2020
 }
-\format{The data frame contains the following columns:
+\format{
+The data frame contains the following columns:
 \tabular{lll}{
 \bold{article}          \tab \code{numeric}   \tab article identifier \cr
 \bold{experiment}       \tab \code{character} \tab experiment (within article) identifier \cr
@@ -62,7 +63,6 @@ dat <- dat.mccurdy2020
 head(dat)
 
 \dontrun{
-
 ### load metafor package
 library(metafor)
 
@@ -76,17 +76,12 @@ res
 data.frame(source=res$s.names, sigma2=round(res$sigma2, 3),
    prop=round(res$sigma2 / sum(res$sigma2), 2))
 
-### apply cluster-robust inference
-sav <- robust(res, cluster=article)
+### apply cluster-robust inference methods
+sav <- robust(res, cluster=article, clubSandwich=TRUE)
 sav
 
 ### estimated average recall rate in read and generate conditions
 predict(sav, newmods = c(0,1), digits=3)
-
-### use methods from clubSandwich package
-sav <- robust(res, cluster=article, clubSandwich=TRUE)
-sav
-
 }
 }
 \keyword{datasets}

@@ -6,7 +6,8 @@
 \usage{
 dat.curtis1998
 }
-\format{The data frame contains the following columns:
+\format{
+The data frame contains the following columns:
 \tabular{lll}{
 \bold{id}       \tab \code{numeric}   \tab observation number \cr
 \bold{paper}    \tab \code{numeric}   \tab paper number \cr
@@ -44,7 +45,7 @@ dat.curtis1998
    } In addition, the studies differed with respect to various design variables, including CO2 exposure duration (\code{time}), growing method (\code{pot}: number = pot size in liters; \code{GRND} = plants rooted in ground; \code{HYDRO} = solution or aeroponic culture), CO2 exposure facility (\code{method}: \code{GC} = growth chamber; \code{GH} = greenhouse; \code{OTC} = field-based open-top chamber), and planting stock (\code{stock}: \code{SEED} = plants started from seeds; \code{SAP} = plants started from cuttings). The goal of the meta-analysis was to examine the effects of elevated CO2 levels on plant physiology and growth and the interacting effects of the environmental (and design) variables.
 }
 \source{
-   Hedges, L. V., Gurevitch, J., & Curtis, P. S. (1999). The meta-analysis of response ratios in experimental ecology. \emph{Ecology}, \bold{80}(4), 1150--1156. \verb{https://doi.org/10.1890/0012-9658(1999)080[1150:TMAORR]2.0.CO;2} (data obtained from \emph{Ecological Archives}, E080-008-S1, at: \url{https://esapubs.org/archive/ecol/E080/008/})
+   Hedges, L. V., Gurevitch, J., & Curtis, P. S. (1999). The meta-analysis of response ratios in experimental ecology. \emph{Ecology}, \bold{80}(4), 1150--1156. \verb{https://doi.org/10.1890/0012-9658(1999)080[1150:TMAORR]2.0.CO;2} (data obtained from \emph{Ecological Archives}, E080-008-S1, at: \verb{https://doi.org/10.6084/m9.figshare.c.3297278})
 }
 \references{
    Curtis, P. S., & Wang, X. (1998). A meta-analysis of elevated CO2 effects on woody plant mass, form, and physiology. \emph{Oecologia}, \bold{113}(3), 299--313. \verb{https://doi.org/10.1007/s004420050381}
@@ -58,7 +59,6 @@ dat <- dat.curtis1998
 head(dat)
 
 \dontrun{
-
 ### load metafor package
 library(metafor)
 
@@ -81,7 +81,6 @@ predict(res, transf=exp, digits=2)
 ### meta-analysis for plants grown under low light conditions
 res <- rma(yi, vi, method="DL", data=dat, subset=(xtrt=="LIGHT" & level=="LOW"))
 predict(res, transf=exp, digits=2)
-
 }
 }
 \keyword{datasets}

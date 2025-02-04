@@ -36,11 +36,11 @@ The data frame contains the following columns:
 }
 }
 \details{
-   This data set comes from a systematic review of 8 pharmacological treatments of depression and placebo in primary care with 66 studies (8 of which were 3-arm studies) including 14,785 patients.
+   This dataset comes from a systematic review of 8 pharmacological treatments of depression and placebo in primary care with 66 studies (8 of which were 3-arm studies) including 14,785 patients.
 
    The primary outcome is early response, defined as at least a 50\% score reduction on a depression scale after completion of treatment. Secondary outcomes (also measured as dichotomous) were early remission (defined as having a symptom score below a fixed threshold after completion of treatment), lost to follow-up, lost to follow-up due to adverse events, and any adverse event. The odds ratio was used as effect measure.
 
-   This data set was used as an example in Rücker and Schwarzer (2017) who introduced methods to resolve conflicting rankings of outcomes in network meta-analysis.
+   This dataset was used as an example in Rücker and Schwarzer (2017) who introduced methods to resolve conflicting rankings of outcomes in network meta-analysis.
 }
 \source{
    Linde, K., Kriston, L., Rücker, G., Jamil, S., Schumann, I., Meissner, K., Sigterman, K., & Schneider, A. (2015). Efficacy and acceptability of pharmacological treatments for depressive disorders in primary care: Systematic review and network meta-analysis. \emph{Annals of Family Medicine}, \bold{13}(1), 69--79. \verb{https://doi.org/10.1370/afm.1687}
@@ -49,7 +49,7 @@ The data frame contains the following columns:
    Rücker, G., & Schwarzer, G. (2017). Resolve conflicting rankings of outcomes in network meta-analysis: Partial ordering of treatments. \emph{Research Synthesis Methods}, \bold{8}(4), 526--536. \verb{https://doi.org/10.1002/jrsm.1270}
 }
 \author{
-   Guido Schwarzer, \email{sc@imbi.uni-freiburg.de}, \url{https://github.com/guido-s/}
+   Guido Schwarzer, \email{guido.schwarzer@uniklinik-freiburg.de}, \url{https://github.com/guido-s/}
 }
 \examples{
 ### Show results from first three studies (including three-arm study
@@ -57,12 +57,11 @@ The data frame contains the following columns:
 head(dat.linde2015, 3)
 
 \dontrun{
-
 ### Load netmeta package
-suppressPackageStartupMessages(library(netmeta))
+suppressPackageStartupMessages(library("netmeta"))
 
 ### Print odds ratios and confidence limits with two digits
-settings.meta(digits = 2)
+oldset <- settings.meta(digits = 2)
 
 ### Change appearance of confidence intervals
 cilayout("(", "-")
@@ -107,10 +106,9 @@ outcomes <- c("Early response", "Early remission")
 po12 <- netposet(nr1, nr2, outcomes = outcomes)
 plot(po12)
 
+### Use previous settings
+settings.meta(oldset)
 }
-}
-\seealso{
-\code{\link[netmeta]{pairwise}}, \code{\link[meta]{metabin}}, \code{\link[netmeta]{netmeta}}, \code{\link[netmeta]{netrank}}
 }
 \keyword{datasets}
 \concept{medicine}

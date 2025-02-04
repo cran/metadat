@@ -6,7 +6,8 @@
 \usage{
 dat.senn2013
 }
-\format{The data frame contains the following columns:
+\format{
+The data frame contains the following columns:
 \tabular{lll}{
 \bold{study}     \tab \code{character} \tab (first) author and year of study \cr
 \bold{ni}        \tab \code{numeric}   \tab sample size of the study arm \cr
@@ -38,7 +39,6 @@ dat <- dat.senn2013
 dat
 
 \dontrun{
-
 ### load metafor package
 library(metafor)
 
@@ -70,7 +70,7 @@ dat$treatment <- relevel(factor(dat$treatment), ref="placebo")
 levels(dat$treatment) <- paste0(" ", levels(dat$treatment))
 
 ### network meta-analysis using an arm-based fixed-effects model with fixed study effects
-res.fe <- rma.mv(yi, vi, mods = ~ study + treatment - 1, data=dat, slab=paste0(study, treatment))
+res.fe <- rma.mv(yi, vi, mods = ~ 0 + study + treatment, data=dat, slab=paste0(study, treatment))
 res.fe
 
 ### test if treatment factor as a whole is significant
@@ -78,7 +78,7 @@ anova(res.fe, btt="treatment")
 
 ### forest plot of the contrast estimates (treatments versus placebos)
 forest(tail(coef(res.fe), 9), tail(diag(vcov(res.fe)), 9), slab=levels(dat$treatment)[-1],
-       xlim=c(-2.5, 2.0), alim=c(-1.5, 0.5), psize=1, xlab="Estimate", header="Treatment")
+       xlim=c(-2.5, 1.5), alim=c(-1.5, 0.5), psize=1, xlab="Estimate", header="Treatment")
 
 ### weight matrix for the estimation of the fixed effects (leaving out the study effects)
 w <- t(tail(vcov(res.fe) \%*\% t(model.matrix(res.fe)) \%*\% weights(res.fe, type="matrix"), 9))
@@ -92,7 +92,7 @@ heatmap(w, Rowv=NA, Colv=NA, scale="none", margins=c(6,11), col=cols,
 
 ### network meta-analysis using an arm-based random-effects model with fixed study effects
 ### by setting rho=1/2, tau^2 reflects the amount of heterogeneity for all treatment comparisons
-res.re <- rma.mv(yi, vi, mods = ~ study + treatment - 1, random = ~ treatment | study, rho=1/2,
+res.re <- rma.mv(yi, vi, mods = ~ 0 + study + treatment, random = ~ treatment | study, rho=1/2,
                  data=dat, slab=paste0(study, treatment))
 res.re
 
@@ -101,7 +101,7 @@ anova(res.re, btt="treatment")
 
 ### forest plot of the contrast estimates (treatments versus placebos)
 forest(tail(coef(res.re), 9), tail(diag(vcov(res.re)), 9), slab=levels(dat$treatment)[-1],
-       xlim=c(-3.0, 2.5), alim=c(-1.5, 0.5), psize=1, xlab="Estimate", header="Treatment")
+       xlim=c(-2.5, 1.5), alim=c(-1.5, 0.5), psize=1, xlab="Estimate", header="Treatment")
 
 ### compute the contribution of each study to the overall Q-test value
 qi <- sort(by((resid(res.fe) / sqrt(dat$vi))^2, dat$study, sum))
@@ -145,8 +145,8 @@ dat
 ### network meta-analysis using a contrast-based random-effects model
 ### by setting rho=1/2, tau^2 reflects the amount of heterogeneity for all treatment comparisons
 ### the treatment left out (placebo) becomes the reference level for the treatment comparisons
-res <- rma.mv(yi, V, mods = ~ acarbose + benfluorex + metformin + miglitol + pioglitazone +
-                              rosiglitazone + sitagliptin + sulfonylurea + vildagliptin - 1,
+res <- rma.mv(yi, V, mods = ~ 0 + acarbose + benfluorex + metformin + miglitol + pioglitazone +
+                              rosiglitazone + sitagliptin + sulfonylurea + vildagliptin,
               random = ~ comp | study, rho=1/2, data=dat)
 res
 
@@ -164,8 +164,8 @@ sav[["slab"]] <- rownames(contr)
 sav
 
 ### fit random inconsistency effects model (see Law et al., 2016)
-inc <- rma.mv(yi, V, mods = ~ acarbose + benfluorex + metformin + miglitol + pioglitazone +
-                              rosiglitazone + sitagliptin + sulfonylurea + vildagliptin - 1,
+inc <- rma.mv(yi, V, mods = ~ 0 + acarbose + benfluorex + metformin + miglitol + pioglitazone +
+                              rosiglitazone + sitagliptin + sulfonylurea + vildagliptin,
               random = list(~ comp | study, ~ comp | design), rho=1/2, phi=1/2, data=dat)
 inc
 
@@ -189,7 +189,6 @@ cbind(pscore=round(sort(apply(tab, 1, mean, na.rm=TRUE), decreasing=TRUE), 3))
 # estimator for the amount of heterogeneity by default
 
 ############################################################################
-
 }
 }
 \keyword{datasets}

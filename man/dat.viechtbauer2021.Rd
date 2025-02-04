@@ -6,7 +6,8 @@
 \usage{
 dat.viechtbauer2021
 }
-\format{The data frame contains the following columns:
+\format{
+The data frame contains the following columns:
 \tabular{lll}{
 \bold{trial}  \tab \code{numeric}   \tab trial number \cr
 \bold{nTi}    \tab \code{numeric}   \tab number of patients in the treatment group \cr
@@ -31,7 +32,6 @@ dat <- dat.viechtbauer2021
 dat
 
 \dontrun{
-
 ### load metafor package
 library(metafor)
 
@@ -63,11 +63,10 @@ res.ME
 par(mar=c(5,4,1,2))
 
 forest(dat$yi, dat$vi, psize=0.8, efac=0, xlim=c(-4,6), ylim=c(-3,23),
-       cex=1, width=c(5,5,5), xlab="Log Odds Ratio (LnOR)")
-addpoly(res.CE, row=-1.5, mlab="CE Model")
-addpoly(res.RE, row=-2.5, mlab="RE Model")
-text(-4, 22, "Trial",         pos=4, font=2)
-text( 6, 22, "LnOR [95\% CI]", pos=2, font=2)
+       cex=1, width=c(5,5,5), xlab="Log Odds Ratio (LnOR)",
+       header=c("Trial", "LnOR [95\% CI]"))
+addpoly(res.CE, row=-1, mlab="CE Model")
+addpoly(res.RE, row=-2, mlab="RE Model")
 abline(h=0)
 
 tmp <- regplot(res.ME, xlim=c(0,250), ylim=c(-1,1.5), predlim=c(0,250), shade=FALSE, digits=1,
@@ -81,10 +80,10 @@ par(mar=c(5,4,4,2))
 
 ### number of standardized deleted residuals larger than +-1.96 in each model
 
-sum(abs(rstudent(res.CE)$z) >= qnorm(.975))
-sum(abs(rstudent(res.MR)$z) >= qnorm(.975))
-sum(abs(rstudent(res.RE)$z) >= qnorm(.975))
-sum(abs(rstudent(res.ME)$z) >= qnorm(.975))
+sum(abs(rstudent(res.CE)$z) >= qnorm(0.975))
+sum(abs(rstudent(res.MR)$z) >= qnorm(0.975))
+sum(abs(rstudent(res.RE)$z) >= qnorm(0.975))
+sum(abs(rstudent(res.ME)$z) >= qnorm(0.975))
 
 ### plot of the standardized deleted residuals for the RE and ME models
 
@@ -232,7 +231,6 @@ title("Covariance Ratios")
 rma(yi, vi, mods = ~ dose, data=dat, method="DL", subset=-3)
 rma(yi, vi, mods = ~ dose, data=dat, method="DL", subset=-6)
 rma(yi, vi, mods = ~ dose, data=dat, method="DL", subset=-c(3,6))
-
 }
 }
 \keyword{datasets}

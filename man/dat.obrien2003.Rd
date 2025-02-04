@@ -6,7 +6,8 @@
 \usage{
 dat.obrien2003
 }
-\format{The data frame contains the following columns:
+\format{
+The data frame contains the following columns:
 \tabular{lll}{
 \bold{study}      \tab \code{numeric}    \tab study id \cr
 \bold{author}     \tab \code{character}  \tab (first) author of the study \cr
@@ -37,7 +38,6 @@ dat <- dat.obrien2003
 dat
 
 \dontrun{
-
 ### load metafor package
 library(metafor)
 
@@ -57,9 +57,9 @@ rows <- (1:nrow(dat2)) + cumsum(dd)
 rows <- 1 + max(rows) - rows
 slabs <- mapply(function(x,y,z) as.expression(bquote(.(x)^.(y)~.(z))),
                 dat2$author, dat2$ref, dat2$year)
-with(dat2, forest(yi, vi, header=TRUE, slab=slabs, xlim=c(-7,5.5), fonts="mono", cex=0.8,
+with(dat2, forest(yi, vi, slab=slabs, xlim=c(-7,5.5), cex=0.8,
    psize=1, pch=19, efac=0, rows=rows, ylim=c(0,max(rows)+3), yaxs="i",
-   atransf=exp, at=log(c(.05,0.1,0.2,0.5,1,2,5,10,20)), ilab=comp, ilab.xpos=-4, ilab.pos=4))
+   atransf=exp, at=log(c(0.05,0.1,0.2,0.5,1,2,5,10,20)), ilab=comp, ilab.xpos=-4, ilab.pos=4))
 text(-4.4, max(rows)+2, "Comparison", font=2, cex=0.8, pos=4)
 
 ### within-study mean center the BMI variable
@@ -111,7 +111,6 @@ tmp <- regplot(res, mod=2, pred=sav,
                label=TRUE, offset=0, labsize=0.6)
 abline(v=knots, lty="dotted")
 points(tmp)
-
 }
 }
 \keyword{datasets}

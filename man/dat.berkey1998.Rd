@@ -6,7 +6,8 @@
 \usage{
 dat.berkey1998
 }
-\format{The data frame contains the following columns:
+\format{
+The data frame contains the following columns:
 \tabular{lll}{
 \bold{trial}      \tab \code{numeric}    \tab trial number \cr
 \bold{author}     \tab \code{character}  \tab study author(s) \cr
@@ -38,7 +39,6 @@ dat <- dat.berkey1998
 dat
 
 \dontrun{
-
 ### load metafor package
 library(metafor)
 
@@ -46,17 +46,16 @@ library(metafor)
 V <- vcalc(vi=1, cluster=author, rvars=c(v1i, v2i), data=dat)
 
 ### fit multiple outcomes (meta-regression) model (with REML estimation)
-res <- rma.mv(yi, V, mods = ~ outcome - 1, random = ~ outcome | trial, struct="UN", data=dat)
+res <- rma.mv(yi, V, mods = ~ 0 + outcome, random = ~ outcome | trial, struct="UN", data=dat)
 print(res, digits=3)
 
 ### test/estimate difference between the two outcomes
 anova(res, X=c(1,-1))
 
 ### fit model including publication year as moderator for both outcomes (with ML estimation)
-res <- rma.mv(yi, V, mods = ~ outcome + outcome:I(year - 1983) - 1,
+res <- rma.mv(yi, V, mods = ~ 0 + outcome + outcome:I(year - 1983),
               random = ~ outcome | trial, struct="UN", data=dat, method="ML")
 print(res, digits=3)
-
 }
 }
 \keyword{datasets}

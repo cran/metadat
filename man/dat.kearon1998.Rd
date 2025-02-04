@@ -6,7 +6,8 @@
 \usage{
 dat.kearon1998
 }
-\format{The data frame contains the following columns:
+\format{
+The data frame contains the following columns:
 \tabular{lll}{
 \bold{id}       \tab \code{numeric}   \tab study id \cr
 \bold{author}   \tab \code{character} \tab study author(s) \cr
@@ -38,7 +39,6 @@ dat <- dat.kearon1998
 head(dat)
 
 \dontrun{
-
 ### load metafor package
 library(metafor)
 
@@ -82,16 +82,15 @@ reg <- regtest(tmp, model="lm")
 reg
 
 ### corresponding funnel plot
-funnel(tmp, atransf=exp, xlim=c(0,7), at=log(c(1,10,100,1000)), ylim=c(0,.15), steps=4,
+funnel(tmp, atransf=exp, xlim=c(0,7), at=log(c(1,10,100,1000)), ylim=c(0,0.15), steps=4,
        refline=coef(res), level=0, ylab="1/root(ess)")
-ys <- seq(0, .20, length=100)
+ys <- seq(0, 0.2, length=100)
 lines(coef(reg$fit)[1] + coef(reg$fit)[2]*ys, ys, lwd=2, lty=3)
 
 ### convert data to long format
 dat <- to.long(measure="OR", ai=tp, n1i=np, ci=tn, n2i=nn,
-               data=dat.kearon1998, subset=patients=="asymptomatic")
-dat <- dat[9:12]
-levels(dat$group) <- c("sensitivity", "specificity")
+               data=dat.kearon1998, subset=patients=="asymptomatic", append=FALSE)
+dat$group <- factor(dat$group, levels=c(1,2), labels=c("sensitivity", "specificity"))
 dat
 
 ### calculate logit-transformed sensitivities
@@ -105,7 +104,7 @@ dat <- escalc(measure="PLO", xi=out1, mi=out2, data=dat, add=1/2, to="all",
 dat
 
 ### bivariate random-effects model for logit sensitivity and specificity
-res <- rma.mv(yi, vi, mods = ~ group - 1, random = ~ group | study, struct="UN", data=dat)
+res <- rma.mv(yi, vi, mods = ~ 0 + group, random = ~ group | study, struct="UN", data=dat)
 res
 
 ### estimated average sensitivity and specificity based on the model
@@ -113,7 +112,6 @@ predict(res, newmods = rbind(c(1,0),c(0,1)), transf=transf.ilogit, tau2.levels=c
 
 ### estimated average diagnostic odds ratio based on the model
 predict(res, newmods = c(1,1), transf=exp, digits=2)
-
 }
 }
 \keyword{datasets}

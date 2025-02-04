@@ -6,7 +6,8 @@
 \usage{
 dat.mcdaniel1994
 }
-\format{The data frame contains the following columns:
+\format{
+The data frame contains the following columns:
 \tabular{lll}{
 \bold{study}    \tab \code{numeric}   \tab study number \cr
 \bold{ni}       \tab \code{numeric}   \tab sample size of the study \cr
@@ -39,7 +40,6 @@ dat <- dat.mcdaniel1994
 head(dat)
 
 \dontrun{
-
 ### load metafor package
 library(metafor)
 
@@ -52,15 +52,25 @@ res <- rma(yi, vi, data=dat)
 res
 
 ### average correlation with 95\% CI
-predict(res, transf=transf.ztor)
+predict(res, transf=transf.ztor, digits=2)
 
 ### mixed-effects model with interview type as factor
 ### note: job-related interviews is the reference level
-rma(yi, vi, mods = ~ factor(type), data=dat)
+res <- rma(yi, vi, mods = ~ factor(type), data=dat)
+res
+
+### estimated average correlation for each level of interview type
+res <- rma(yi, vi, mods = ~ 0 + factor(type), data=dat)
+predict(res, newmods=diag(3), transf=transf.ztor, digits=2)
 
 ### mixed-effects model with interview structure as factor
 ### note: structured interviews is the reference level
-rma(yi, vi, mods = ~ factor(struct), data=dat)
+res <- rma(yi, vi, mods = ~ factor(struct), data=dat)
+res
+
+### estimated average correlation for each level of interview structure
+res <- rma(yi, vi, mods = ~ 0 + factor(struct), data=dat)
+predict(res, newmods=diag(2), transf=transf.ztor, digits=2)
 
 ### note: the interpretation of the results is difficult since all
 ### situational interviews were structured, almost all psychological
@@ -72,7 +82,6 @@ table(dat$type, dat$struct, useNA="always")
 ### meta-analysis of raw correlations using a random-effects model
 res <- rma(measure="COR", ri=ri, ni=ni, data=dat.mcdaniel1994)
 res
-
 }
 }
 \keyword{datasets}

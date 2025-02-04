@@ -6,7 +6,8 @@
 \usage{
 dat.hart1999
 }
-\format{The data frame contains the following columns:
+\format{
+The data frame contains the following columns:
 \tabular{lll}{
 \bold{trial}    \tab \code{numeric}   \tab trial number \cr
 \bold{study}    \tab \code{character} \tab study name (abbreviated) \cr
@@ -37,7 +38,6 @@ dat <- dat.hart1999
 dat
 
 \dontrun{
-
 ### load metafor package
 library(metafor)
 
@@ -54,12 +54,12 @@ predict(res, transf=exp)
 
 ### forest plot with extra annotations
 par(mar=c(5,4,1,2))
-forest(res, xlim=c(-11, 5), at=log(c(.05, .25, 1, 4)), atransf=exp,
+forest(res, xlim=c(-11, 5), at=log(c(0.05, 0.25, 1, 4)), atransf=exp,
        slab=paste0(study, " (", year, ")"),
        ilab=cbind(paste(x1i, "/", t1i, sep=" "),
                   paste(x2i, "/", t2i, sep=" ")),
-       ilab.xpos=c(-6.5,-4), cex=.85, header="Study (Year)")
-op <- par(cex=.85, font=2)
+       ilab.xpos=c(-6.5,-4), cex=0.85, header="Study (Year)")
+op <- par(cex=0.85, font=2)
 text(c(-6.5,-4), 8.5, c("Warfarin", "Control"))
 text(c(-6.5,-4), 7.5, c("Strokes / PT", "Strokes / PT"))
 segments(x0=-8, y0=8, x1=-2.75, y1=8)
@@ -68,7 +68,6 @@ par(op)
 ### meta-analysis of incidence rate differences using a random-effects model
 res <- rma(measure="IRD", x1i=x1i, x2i=x2i, t1i=t1i, t2i=t2i, data=dat)
 res
-
 }
 }
 \keyword{datasets}

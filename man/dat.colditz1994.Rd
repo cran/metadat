@@ -6,7 +6,8 @@
 \usage{
 dat.colditz1994
 }
-\format{The data frame contains the following columns:
+\format{
+The data frame contains the following columns:
 \tabular{lll}{
 \bold{trial}  \tab \code{numeric}   \tab trial number \cr
 \bold{author} \tab \code{character} \tab author(s) \cr
@@ -48,12 +49,13 @@ dat <- dat.colditz1994
 dat
 
 \dontrun{
-
 ### load metafor package
 library(metafor)
 
 ### calculate log risk ratios and corresponding sampling variances
-dat <- escalc(measure="RR", ai=tpos, bi=tneg, ci=cpos, di=cneg, data=dat)
+dat <- escalc(measure="RR", ai=tpos, bi=tneg,
+                            ci=cpos, di=cneg, data=dat,
+                            slab=paste0(author, ", ", year))
 dat
 
 ### random-effects model
@@ -76,7 +78,6 @@ predict(res, newmods=cbind(seq(from=10, to=60, by=10), 1970), transf=exp)
 ### studies were conducted closer to the equator)
 plot(ablat ~ year, data=dat, pch=19, xlab="Publication Year", ylab="Absolute Lattitude")
 cor(dat$ablat, dat$year)
-
 }
 }
 \keyword{datasets}

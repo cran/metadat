@@ -6,7 +6,8 @@
 \usage{
 dat.frank2008
 }
-\format{The data frame contains the following columns:
+\format{
+The data frame contains the following columns:
 \tabular{lll}{
 \bold{study}      \tab \code{character} \tab study identifier \cr
 \bold{bc.ins.ins} \tab \code{numeric}   \tab number of cases who have a homozygous insertion polymorphism \cr
@@ -24,7 +25,7 @@ dat.frank2008
 
 }
 \source{
-   Frank, B., Rigas, S. H., Bermejo, J. L., Wiestler, M., Wagner, K., Hemminki, K., Reed, M. W., Sutter, C., Wappenschmidt, B., Balasubramanian, S. P., Meindl, A., Kiechle, M., Bugert, P., Schmutzler, R. K., Bartram, C. R., Justenhoven, C., Ko, Y.-D., Brüning, T., Brauch, H., Hamann, U., Pharoah, P. P. D., Dunning, A. M., Pooley, K. A., Easton, D. F., Cox, A. & Burwinkel, B. (2008). The CASP8 -652 6N del promoter polymorphism and breast cancer risk: A multicenter study. \emph{Breast Cancer Research and Treatment}, \bold{111}(1), 139-144. \verb{https://doi.org/10.1007/s10549-007-9752-z}
+   Frank, B., Rigas, S. H., Bermejo, J. L., Wiestler, M., Wagner, K., Hemminki, K., Reed, M. W., Sutter, C., Wappenschmidt, B., Balasubramanian, S. P., Meindl, A., Kiechle, M., Bugert, P., Schmutzler, R. K., Bartram, C. R., Justenhoven, C., Ko, Y.-D., Brüning, T., Brauch, H., Hamann, U., Pharoah, P. P. D., Dunning, A. M., Pooley, K. A., Easton, D. F., Cox, A. & Burwinkel, B. (2008). The CASP8 -652 6N del promoter polymorphism and breast cancer risk: A multicenter study. \emph{Breast Cancer Research and Treatment}, \bold{111}(1), 139--144. \verb{https://doi.org/10.1007/s10549-007-9752-z}
 }
 \references{
    Ziegler, A., Steen, K. V. & Wellek, S. (2011). Investigating Hardy-Weinberg equilibrium in case-control or cohort studies or meta-analysis. \emph{Breast Cancer Research and Treatment}, \bold{128}(1), 197--201. \verb{https://doi.org/10.1007/s10549-010-1295-z}
@@ -38,7 +39,6 @@ dat <- dat.frank2008
 dat
 
 \dontrun{
-
 ### load metafor package
 library(metafor)
 
@@ -81,10 +81,9 @@ res
 predict(res, transf=exp, digits=2)
 
 ### draw forest plot
-forest(res, atransf=exp, header=TRUE, xlim=c(-1.5,1.5), at=log(c(0.5,5/7,1,7/5,2)))
+forest(res, atransf=exp, xlim=c(-1.4,1.4), at=log(c(0.5,5/7,1,7/5,2)))
 segments(log(5/7), -2, log(5/7), res$k+1, lty="dotted")
 segments(log(7/5), -2, log(7/5), res$k+1, lty="dotted")
-
 }
 }
 \keyword{datasets}

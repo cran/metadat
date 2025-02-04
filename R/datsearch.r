@@ -71,8 +71,9 @@ In terms of fields/topics, the following terms have been used at least once:
 
 alternative medicine, attraction, cardiology, climate change, covid-19,
 criminology, dentistry, ecology, education, engineering, epidemiology,
-evolution, genetics, human factors, medicine, memory, obstetrics, oncology, persuasion,
-primary care, psychiatry, psychology, smoking, social work, sociology.
+evolution, genetics, human factors, medicine, memory, obstetrics, oncology,
+persuasion, primary care, psychiatry, psychology, smoking, social work,
+sociology.
 
 In terms of outcome measures, the following terms have been used at least once:
 
@@ -88,7 +89,7 @@ meta-analysis, diagnostic accuracy studies, dose response models, generalized
 linear models, longitudinal models, Mantel-Haenszel method, meta-regression,
 model checks, multilevel models, multivariate models, network meta-analysis,
 outliers, Peto's method, phylogeny, publication bias, reliability
-generalization, single-arm studies, spatial correlation.")
+generalization, single-arm studies, spatial correlation, subgroup analysis.")
          cat("\n\n")
          pattern <- NULL
          next
@@ -153,6 +154,9 @@ generalization, single-arm studies, spatial correlation.")
          for (i in 1:n) {
             matches[[i]] <- utils::help.search(pattern[i], package="metadat", fields="concept")$matches
          }
+
+         if (pattern == "")
+            matches[[1]] <- matches[[1]][!is.element(matches[[1]]$Name, c("datsearch", "metadat-package", "prep_dat")),]
 
       } else {
 

@@ -6,7 +6,8 @@
 \usage{
 dat.dorn2007
 }
-\format{The data frame contains the following columns:
+\format{
+The data frame contains the following columns:
 \tabular{lll}{
 \bold{id}       \tab \code{numeric}   \tab trial id number \cr
 \bold{study}    \tab \code{character} \tab (first) author \cr
@@ -40,7 +41,6 @@ dat <- dat.dorn2007
 dat
 
 \dontrun{
-
 ### load metafor package
 library(metafor)
 
@@ -55,7 +55,7 @@ res
 predict(res, transf=exp)
 
 ### funnel plot with study 5 highlighted in red
-funnel(res, atransf=exp, at=log(c(.1, .2, .5, 1, 2, 5, 10)),
+funnel(res, atransf=exp, at=log(c(0.1, 0.2, 0.5, 1, 2, 5, 10)),
        ylim=c(0,1), steps=6, las=1, col=ifelse(id == 5, "red", "black"))
 
 ### change log risk ratio for study 5
@@ -67,9 +67,8 @@ res <- rma(yi, vi, data=dat, digits=2, method="DL")
 predict(res, transf=exp)
 
 ### funnel plot with study 5 highlighted in red
-funnel(res, atransf=exp, at=log(c(.1, .2, .5, 1, 2, 5, 10)),
+funnel(res, atransf=exp, at=log(c(0.1, 0.2, 0.5, 1, 2, 5, 10)),
        ylim=c(0,1), steps=6, las=1, col=ifelse(id == 5, "red", "black"))
-
 }
 }
 \keyword{datasets}

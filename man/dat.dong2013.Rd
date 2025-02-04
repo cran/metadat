@@ -20,7 +20,7 @@ The data frame contains the following columns:
 
    Mortality was reported in 41 randomized trials, with a total of 52 462 patients. Mortality was low, with 2 408 deaths (4.6\%) reported across all studies. There were nine studies that reported zero events in at least one of the treatment arms and three additional studies had zero events in all treatment arms.
 
-   This data set was used in Efthimiou et al. (2019) to illustrate the Mantel-Haenszel method for network meta-analysis.
+   This dataset was used in Efthimiou et al. (2019) to illustrate the Mantel-Haenszel method for network meta-analysis.
 }
 \source{
    Dong, Y.-H., Lin, H.-H., Shau, W.-Y., Wu, Y.-C., Chang, C.-H., & Lai, M.-S. (2013). Comparative safety of inhaled medications in patients with chronic obstructive pulmonary disease: Systematic review and mixed treatment comparison meta-analysis of randomised controlled trials. \emph{Thorax}, \bold{68}(1), 48--56. \verb{https://doi.org/10.1136/thoraxjnl-2012-201926}
@@ -29,19 +29,18 @@ The data frame contains the following columns:
    Efthimiou, O., Rücker, G., Schwarzer, G., Higgins, J., Egger, M., & Salanti, G. (2019). A Mantel-Haenszel model for network meta-analysis of rare events. \emph{Statistics in Medicine}, \bold{38}(16), 2992--3012. \verb{https://doi.org/10.1002/sim.8158}
 }
 \author{
-   Guido Schwarzer, \email{sc@imbi.uni-freiburg.de}, \url{https://github.com/guido-s/}
+   Guido Schwarzer, \email{guido.schwarzer@uniklinik-freiburg.de}, \url{https://github.com/guido-s/}
 }
 \examples{
 ### Show first 6 rows / 3 studies of the dataset
 head(dat.dong2013)
 
 \dontrun{
-
 ### Load netmeta package
-suppressPackageStartupMessages(library(netmeta))
+suppressPackageStartupMessages(library("netmeta"))
 
 ### Print odds ratios and confidence limits with two digits
-settings.meta(digits = 2)
+oldset <- settings.meta(digits = 2)
 
 ### Change appearance of confidence intervals
 cilayout("(", "-")
@@ -77,10 +76,9 @@ netleague(net)
 print(netsplit(net), show = "both", ci = TRUE, overall = FALSE,
   nchar.trts = 6)
 
+### Use previous settings
+settings.meta(oldset)
 }
-}
-\seealso{
-   \code{\link[netmeta]{pairwise}}, \code{\link[meta]{metabin}}, \code{\link[netmeta]{netmetabin}}
 }
 \keyword{datasets}
 \concept{medicine}

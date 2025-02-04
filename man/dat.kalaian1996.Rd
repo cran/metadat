@@ -6,7 +6,8 @@
 \usage{
 dat.kalaian1996
 }
-\format{The data frame contains the following columns:
+\format{
+The data frame contains the following columns:
 \tabular{lll}{
 \bold{id}          \tab \code{numeric}   \tab row (effect) id \cr
 \bold{study}       \tab \code{character} \tab study identifier \cr
@@ -40,7 +41,6 @@ dat <- dat.kalaian1996
 head(dat, 12)
 
 \dontrun{
-
 ### load metafor package
 library(metafor)
 
@@ -49,14 +49,14 @@ range(dat$yi[dat$outcome == "verbal"]) # -0.35 to 0.74 according to page 230
 range(dat$yi[dat$outcome == "math"])   # -0.53 to 0.60 according to page 231
 
 ### comparing this with Figure 1 in the paper reveals some discrepancies
-par(mfrow=c(1,2), mar=c(5,4,1,1))
+par(mfrow=c(1,2), mar=c(5,5,1,3.4))
 plot(log(dat$hrs[dat$outcome == "verbal"]), dat$yi[dat$outcome == "verbal"],
-     pch=19, xlab="Log(Coaching Hours)", ylab="Effect Size (verbal)",
+     pch=19, col=rgb(0,0,0,0.4), xlab="Log(Coaching Hours)", ylab="Effect Size (verbal)",
      xlim=c(1,6), ylim=c(-0.5,1), xaxs="i", yaxs="i")
 abline(h=c(-0.5,0,0.5), lty="dotted")
 abline(v=log(c(5,18)),  lty="dotted")
 plot(log(dat$hrs[dat$outcome == "math"]), dat$yi[dat$outcome == "math"],
-     pch=19, xlab="Log(Coaching Hours)", ylab="Effect Size (math)",
+     pch=19, col=rgb(0,0,0,0.4), xlab="Log(Coaching Hours)", ylab="Effect Size (math)",
      xlim=c(1,6), ylim=c(-1.0,1), xaxs="i", yaxs="i")
 abline(h=c(-0.5,0,0.5), lty="dotted")
 abline(v=log(c(5,18)),  lty="dotted")
@@ -66,7 +66,7 @@ abline(v=log(c(5,18)),  lty="dotted")
 V <- vcalc(vi, cluster=study, type=outcome, data=dat, rho=0.66)
 
 ### fit multivariate random-effects model
-res <- rma.mv(yi, V, mods = ~ outcome - 1,
+res <- rma.mv(yi, V, mods = ~ 0 + outcome,
               random = ~ outcome | study, struct="UN",
               data=dat, digits=3)
 res
@@ -78,17 +78,16 @@ anova(res, X=c(1,-1))
 dat$loghrs <- log(dat$hrs) - mean(log(dat$hrs), na.rm=TRUE)
 
 ### fit multivariate model with log(hrs) as moderator
-res <- rma.mv(yi, V, mods = ~ outcome + outcome:loghrs - 1,
+res <- rma.mv(yi, V, mods = ~ 0 + outcome + outcome:loghrs,
               random = ~ outcome | study, struct="UN",
               data=dat, digits=3)
 res
 
 ### fit model with tau2 = 0 for outcome verbal (which also constrains rho = 0)
-res <- rma.mv(yi, V, mods = ~ outcome + outcome:loghrs - 1,
+res <- rma.mv(yi, V, mods = ~ 0 + outcome + outcome:loghrs,
               random = ~ outcome | study, struct="UN", tau2=c(NA,0),
               data=dat, digits=3)
 res
-
 }
 }
 \keyword{datasets}

@@ -6,7 +6,8 @@
 \usage{
 dat.hasselblad1998
 }
-\format{The data frame contains the following columns:
+\format{
+The data frame contains the following columns:
 \tabular{lll}{
 \bold{id}         \tab \code{numeric}    \tab id number for each treatment arm \cr
 \bold{study}      \tab \code{numeric}    \tab study id number \cr
@@ -41,7 +42,6 @@ dat <- dat.hasselblad1998
 dat
 
 \dontrun{
-
 ### load metafor package
 library(metafor)
 
@@ -72,7 +72,7 @@ levels(dat$trt) <- paste0(" ", levels(dat$trt))
 
 ### network meta-analysis using an arm-based model with fixed study effects
 ### by setting rho=1/2, tau^2 reflects the amount of heterogeneity for all treatment comparisons
-res <- rma.mv(yi, vi, mods = ~ factor(study) + trt - 1,
+res <- rma.mv(yi, vi, mods = ~ 0 + factor(study) + trt,
               random = ~ trt | study, rho=1/2, data=dat, btt="trt")
 res
 
@@ -85,11 +85,9 @@ predict(res, newmods=cbind(matrix(0, nrow=3, ncol=24), rbind(c(-1,1,0), c(-1,0,1
         intercept=FALSE, transf=exp, digits=2)
 
 ### forest plot of ORs of interventions versus no contact
-dev.new(width=7, height=4)
-par(mar=c(5,4,1,2))
 forest(c(0,res$beta[25:27]), sei=c(0,res$se[25:27]), psize=1, xlim=c(-3,4), digits=c(2,1), efac=2,
        slab=c("No Contact", "Self-Help", "Individual Counseling", "Group Counseling"),
-       atransf=exp, at=log(c(.5, 1, 2, 4, 8)), xlab="Odds Ratio for Intervention vs. No Contact",
+       atransf=exp, at=log(c(0.5, 1, 2, 4, 8)), xlab="Odds Ratio for Intervention vs. No Contact",
        header=c("Intervention", "Odds Ratio [95\% CI]"))
 
 ############################################################################
@@ -117,7 +115,7 @@ dat
 
 ### network meta-analysis using a contrast-based random-effects model
 ### by setting rho=1/2, tau^2 reflects the amount of heterogeneity for all treatment comparisons
-res <- rma.mv(yi, V, mods = ~ self_help + ind_counseling + grp_counseling - 1,
+res <- rma.mv(yi, V, mods = ~ 0 + self_help + ind_counseling + grp_counseling,
               random = ~ comp | study, rho=1/2, data=dat)
 res
 
@@ -125,10 +123,9 @@ res
 predict(res, newmods=diag(3), transf=exp, digits=2)
 
 ### fit random inconsistency effects model (see Law et al., 2016)
-res <- rma.mv(yi, V, mods = ~ self_help + ind_counseling + grp_counseling - 1,
+res <- rma.mv(yi, V, mods = ~ 0 + self_help + ind_counseling + grp_counseling,
               random = list(~ comp | study, ~ comp | design), rho=1/2, phi=1/2, data=dat)
 res
-
 }
 }
 \keyword{datasets}

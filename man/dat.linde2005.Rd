@@ -6,7 +6,8 @@
 \usage{
 dat.linde2005
 }
-\format{The data frame contains the following columns:
+\format{
+The data frame contains the following columns:
 \tabular{lll}{
 \bold{id}       \tab \code{numeric}   \tab study number \cr
 \bold{study}    \tab \code{character} \tab study author(s) \cr
@@ -64,7 +65,6 @@ dat <- dat.linde2005
 head(dat)
 
 \dontrun{
-
 ### load metafor package
 library(metafor)
 
@@ -80,12 +80,11 @@ res <- rma(yi, vi, data=dat, method="DL")
 res
 
 ### mixed-effects meta-regression model with stratification variable
-res <- rma(yi, vi, mods = ~ factor(group) - 1, data=dat, method="DL")
+res <- rma(yi, vi, mods = ~ 0 + factor(group), data=dat, method="DL")
 res
 
 ### predicted average risk ratio for each level of the stratification variable
 predict(res, newmods=diag(4), transf=exp, digits=2)
-
 }
 }
 \keyword{datasets}

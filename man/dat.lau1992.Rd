@@ -6,7 +6,8 @@
 \usage{
 dat.lau1992
 }
-\format{The data frame contains the following columns:
+\format{
+The data frame contains the following columns:
 \tabular{lll}{
 \bold{trial} \tab \code{character} \tab trial name \cr
 \bold{year}  \tab \code{numeric}   \tab publication year \cr
@@ -31,7 +32,6 @@ dat <- dat.lau1992
 dat
 
 \dontrun{
-
 ### load metafor package
 library(metafor)
 
@@ -40,21 +40,20 @@ res <- rma.mh(measure="OR", ai=ai, n1i=n1i, ci=ci, n2i=n2i, data=dat, slab=trial
 print(res, digits=2)
 
 ### forest plot
-forest(res, xlim=c(-10,9), atransf=exp, at=log(c(.01, 0.1, 1, 10, 100)),
-       header=TRUE, top=2, ilab=dat$year, ilab.xpos=-6)
-text(-6, 35, "Year", font=2)
+forest(res, xlim=c(-11,9), atransf=exp, at=log(c(0.01, 0.1, 1, 10, 100)),
+       ilab=dat$year, ilab.xpos=-7)
+text(-7, 35, "Year", font=2)
 
 ### cumulative meta-analysis
 sav <- cumul(res)
 
 ### forest plot of the cumulative results
 forest(sav, xlim=c(-5,4), atransf=exp, at=log(c(0.1, 0.5, 1, 2, 10)),
-       header=TRUE, top=2, ilab=dat$year, ilab.xpos=-3)
+       ilab=dat$year, ilab.xpos=-3)
 text(-3, 35, "Year", font=2)
 id <- c(4, 8, 15, 33) # rows for which the z/p-values should be shown (as in Lau et al., 1992)
-text(1.1, (res$k:1)[id], paste0("z = ", formatC(sav$zval[id], format="f", digits=2),
-                                ", p = ", formatC(sav$pval[id], format="f", digits=4)))
-
+text(1.1, (res$k:1)[id], paste0("z = ", fmtx(sav$zval[id], digits=2),
+                                fmtp(sav$pval[id], pname=", p", equal=TRUE, sep=TRUE, add0=TRUE)))
 }
 }
 \keyword{datasets}

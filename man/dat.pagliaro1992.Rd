@@ -6,7 +6,8 @@
 \usage{
 dat.pagliaro1992
 }
-\format{The data frame contains the following columns:
+\format{
+The data frame contains the following columns:
 \tabular{lll}{
 \bold{study}    \tab \code{numeric}   \tab study id \cr
 \bold{trt}      \tab \code{character} \tab either beta-blockers, sclerotherapy, or control \cr
@@ -29,7 +30,6 @@ dat <- dat.pagliaro1992
 dat
 
 \dontrun{
-
 ### load metafor package
 library(metafor)
 
@@ -55,7 +55,7 @@ levels(dat$trt) <- paste0(" ", levels(dat$trt))
 
 ### network meta-analysis using an arm-based random-effects model with fixed study effects
 ### (by setting rho=1/2, tau^2 reflects the amount of heterogeneity for all treatment comparisons)
-res <- rma.mv(yi, vi, mods = ~ factor(study) + trt - 1, random = ~ trt | study, rho=1/2, data=dat)
+res <- rma.mv(yi, vi, mods = ~ 0 + factor(study) + trt, random = ~ trt | study, rho=1/2, data=dat)
 res
 
 ### average odds ratio comparing beta-blockers and sclerotherapy versus control, respectively
@@ -64,7 +64,6 @@ predict(res, newmods=c(rep(0,26), 0, 1), transf=exp, digits=2)
 
 ### average odds ratio comparing beta-blockers versus sclerotherapy
 predict(res, newmods=c(rep(0,26), 1, -1), transf=exp, digits=2)
-
 }
 }
 \keyword{datasets}

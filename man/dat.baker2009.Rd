@@ -18,7 +18,7 @@ The data frame contains the following columns:
 }
 }
 \details{
-   This data set comes from a systematic review of randomized controlled trials on pharmacologic treatments for chronic obstructive pulmonary disease (COPD) (Baker et al., 2009).
+   This dataset comes from a systematic review of randomized controlled trials on pharmacologic treatments for chronic obstructive pulmonary disease (COPD) (Baker et al., 2009).
 
    The primary outcome, occurrence of one or more episodes of COPD exacerbation, is binary (yes / no). For this outcome, five drug treatments (fluticasone, budesonide, salmeterol, formoterol, tiotropium) and two combinations (fluticasone + salmeterol, budesonide + formoterol) were compared to placebo. The authors considered the two combinations as separate treatments instead of evaluating the individual components.
 }
@@ -26,19 +26,18 @@ The data frame contains the following columns:
    Baker, W. L., Baker, E. L., & Coleman, C. I. (2009). Pharmacologic treatments for chronic obstructive pulmonary disease: A mixed-treatment comparison meta-analysis. \emph{Pharmacotherapy: The Journal of Human Pharmacology and Drug Therapy}, \bold{29}(8), 891--905. \verb{https://doi.org/10.1592/phco.29.8.891}
 }
 \author{
-   Guido Schwarzer, \email{sc@imbi.uni-freiburg.de}, \url{https://github.com/guido-s/}
+   Guido Schwarzer, \email{guido.schwarzer@uniklinik-freiburg.de}, \url{https://github.com/guido-s/}
 }
 \examples{
 ### Show first 6 rows of the dataset
 head(dat.baker2009)
 
 \dontrun{
-
 ### Load netmeta package
-suppressPackageStartupMessages(library(netmeta))
+suppressPackageStartupMessages(library("netmeta"))
 
 ### Print odds ratios and confidence limits with two digits
-settings.meta(digits = 2)
+oldset <- settings.meta(digits = 2)
 
 ### Transform data from long arm-based format to contrast-based
 ### format. Argument 'sm' has to be used for odds ratio as summary
@@ -70,12 +69,9 @@ cnet
 nb <- netbind(net, cnet, name = c("Standard NMA", "Additive CNMA"))
 forest(nb)
 
+### Use previous settings
+settings.meta(oldset)
 }
-}
-\seealso{
-\code{\link[netmeta]{pairwise}}, \code{\link[meta]{metabin}},
-\code{\link[netmeta]{netmeta}}, \code{\link[netmeta]{netcomb}},
-\code{\link[netmeta]{netmetabin}}
 }
 \keyword{datasets}
 \concept{medicine}

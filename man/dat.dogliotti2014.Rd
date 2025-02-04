@@ -17,7 +17,7 @@ The data frame contains the following columns:
 }
 }
 \details{
-   This data set comes from a systematic review aiming to estimate the effects of eight antithrombotic treatments including placebo in reducing the incidence of major thrombotic events in patients with non-valvular atrial fibrillation (Dogliotti et al., 2014).
+   This dataset comes from a systematic review aiming to estimate the effects of eight antithrombotic treatments including placebo in reducing the incidence of major thrombotic events in patients with non-valvular atrial fibrillation (Dogliotti et al., 2014).
 
    The review included 20 studies with 79,808 participants, four studies are three-arm studies. The primary outcome is stroke reduction (yes / no).
 }
@@ -25,19 +25,18 @@ The data frame contains the following columns:
    Dogliotti, A., Paolasso, E., & Giugliano, R. P. (2014). Current and new oral antithrombotics in non-valvular atrial fibrillation: A network meta-analysis of 79808 patients. \emph{Heart}, \bold{100}(5), 396--405. \verb{https://doi.org/10.1136/heartjnl-2013-304347}
 }
 \author{
-   Guido Schwarzer, \email{sc@imbi.uni-freiburg.de}, \url{https://github.com/guido-s/}
+   Guido Schwarzer, \email{guido.schwarzer@uniklinik-freiburg.de}, \url{https://github.com/guido-s/}
 }
 \examples{
 ### Show first 7 rows / 3 studies of the dataset
 head(dat.dogliotti2014, 7)
 
 \dontrun{
-
 ### Load netmeta package
-suppressPackageStartupMessages(library(netmeta))
+suppressPackageStartupMessages(library("netmeta"))
 
 ### Print odds ratios and confidence limits with two digits
-settings.meta(digits = 2)
+oldset <- settings.meta(digits = 2)
 
 ### Change appearance of confidence intervals
 cilayout("(", "-")
@@ -74,10 +73,9 @@ forest(nb, xlim = c(0.15, 2), at = c(0.2, 0.5, 1, 2))
 net
 forest(net)
 
+### Use previous settings
+settings.meta(oldset)
 }
-}
-\seealso{  
-   \code{\link[netmeta]{pairwise}}, \code{\link[meta]{metabin}}, \code{\link[netmeta]{netmeta}}, \code{\link[netmeta]{netmetabin}}
 }
 \keyword{datasets}
 \concept{medicine}

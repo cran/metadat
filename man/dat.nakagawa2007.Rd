@@ -30,7 +30,6 @@ dat <- dat.nakagawa2007
 dat
 
 \dontrun{
-
 ### load metafor package
 library(metafor)
 
@@ -38,9 +37,8 @@ library(metafor)
 dat <- escalc(measure="ZCOR", ri=Correlation, ni=SampleSize, data=dat)
 
 ### fit meta-analytic model
-res <- rma.mv(yi, vi, random = list(~ 1 | StudyID), data=dat)
+res <- rma.mv(yi, vi, random = ~ 1 | StudyID, data=dat)
 res
-
 }
 }
 \keyword{datasets}

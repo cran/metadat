@@ -6,7 +6,8 @@
 \usage{
 dat.cohen1981
 }
-\format{The data frame contains the following columns:
+\format{
+The data frame contains the following columns:
 \tabular{lll}{
 \bold{study}     \tab \code{character} \tab study author(s) and year \cr
 \bold{sample}    \tab \code{character} \tab course type \cr
@@ -21,7 +22,7 @@ dat.cohen1981
    Note that this dataset (extracted from Table A.3 in Cooper & Hedges, 1994) only contains studies with at least 10 sections.
 }
 \source{
-   Cooper, H., & Hedges, L. V. (1994). Appendix A: Data Sets. In H. Cooper & L. V. Hedges (Eds.), \emph{The handbook of research synthesis} (pp. 543-547). New York: Russell Sage Foundation.
+   Cooper, H., & Hedges, L. V. (1994). Appendix A: Data Sets. In H. Cooper & L. V. Hedges (Eds.), \emph{The handbook of research synthesis} (pp. 543--547). New York: Russell Sage Foundation.
 }
 \references{
    Cohen, P. A. (1981). Student ratings of instruction and student achievement: A meta-analysis of multisection validity studies. \emph{Review of Educational Research}, \bold{51}(3), 281--309. \verb{https://doi.org/10.3102/00346543051003281}
@@ -35,7 +36,6 @@ dat <- dat.cohen1981
 dat[c(1,4,5)]
 
 \dontrun{
-
 ### load metafor package
 library(metafor)
 
@@ -49,7 +49,6 @@ res
 
 ### predicted average correlation with 95\% CI
 predict(res, transf=transf.ztor)
-
 }
 }
 \keyword{datasets}
