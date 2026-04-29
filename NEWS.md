@@ -1,3 +1,9 @@
+# metadat 1.6-0 (2026-04-29)
+
+- added `dat.demir2022`, `dat.chiarito2020`, `dat.karner2014`, `dat.meeker2017`, `dat.nissen2007`, `dat.bauer2002`, `dat.huber2000`, `dat.feng2019`, `dat.greb2008`, `dat.greenland1992`, `dat.higgins2008`, `dat.thompson1999`, `dat.lloyd2010`, `dat.moore1998`, `dat.poole2003`, `dat.quan2000`, `dat.steurer2006`, `dat.tian2009`, `dat.rivera2025`, `dat.anker2025`, `dat.metap`, and `dat.berkey1998r`
+- minor adjustments to `dat.furukawa2003`, `dat.linde2016`, and `dat.spooner2002`
+- fixed problem with `datsearch()` failing when using multiple search terms
+
 # metadat 1.4-0 (2025-02-04)
 
 - added `dat.bartos2023`, `dat.bassler2004`, `dat.crisafulli2020`, `dat.curtin2002`, `dat.dumouchel1994`, `dat.furukawa2003`, `dat.roever2022`, `dat.spooner2002`, and `dat.ursino2021`

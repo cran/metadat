@@ -42,7 +42,7 @@ dat.stowe2010[18:20, ]
 
 \dontrun{
 ### Load netmeta package
-suppressPackageStartupMessages(library("netmeta"))
+suppressPackageStartupMessages(library(netmeta))
 
 ### Print mean differences with two digits and standard errors with 3
 ### digits
@@ -61,7 +61,7 @@ subset(pw, studlab \%in\% selstudy)[, c(3:7, 10, 1)]
 
 ### Conduct random effects network meta-analysis (NMA)
 ### with placebo as reference
-net <- netmeta(pw, fixed = FALSE, ref = "plac")
+net <- netmeta(pw, common = FALSE, ref = "plac")
 
 ### Show network graph
 netgraph(net, number = TRUE, multiarm = TRUE,

@@ -72,24 +72,25 @@ In terms of fields/topics, the following terms have been used at least once:
 alternative medicine, attraction, cardiology, climate change, covid-19,
 criminology, dentistry, ecology, education, engineering, epidemiology,
 evolution, genetics, human factors, medicine, memory, obstetrics, oncology,
-persuasion, primary care, psychiatry, psychology, smoking, social work,
-sociology.
+persuasion, primary care, psychiatry, psychology, pulmonology, rheumatology,
+smoking, social work, sociology, sports.
 
 In terms of outcome measures, the following terms have been used at least once:
 
-correlation coefficients, Cronbach's alpha, hazard ratios, incidence rates,
-raw mean differences, odds ratios, proportions, ratios of means, raw means,
-risk differences, risk ratios, (semi-)partial correlations, standardized mean
-changes, standardized mean differences.
+common language effect size, correlation coefficients, Cronbach's alpha,
+hazard ratios, incidence rates, raw mean differences, odds ratios, proportions,
+ratios of means, raw means, risk differences, risk ratios, (semi-)partial
+correlations, standardized mean changes, standardized mean differences.
 
 In terms of models/methods/concepts, the following terms have been used at least once:
 
-cluster-robust inference, component network meta-analysis, cumulative
-meta-analysis, diagnostic accuracy studies, dose response models, generalized
-linear models, longitudinal models, Mantel-Haenszel method, meta-regression,
-model checks, multilevel models, multivariate models, network meta-analysis,
-outliers, Peto's method, phylogeny, publication bias, reliability
-generalization, single-arm studies, spatial correlation, subgroup analysis.")
+cluster-robust inference, combining p-values, component network meta-analysis,
+cumulative meta-analysis, diagnostic accuracy studies, dose response models,
+generalized linear models, individual participant data, longitudinal models,
+Mantel-Haenszel method, meta-regression, missing data, model checks,
+multilevel models, multivariate models, network meta-analysis, outliers,
+Peto's method, phylogeny, prevalence, publication bias, reliability generalization,
+risk-of-bias, single-arm studies, spatial correlation, subgroup analysis.")
          cat("\n\n")
          pattern <- NULL
          next
@@ -155,7 +156,7 @@ generalization, single-arm studies, spatial correlation, subgroup analysis.")
             matches[[i]] <- utils::help.search(pattern[i], package="metadat", fields="concept")$matches
          }
 
-         if (pattern == "")
+         if (identical(pattern, ""))
             matches[[1]] <- matches[[1]][!is.element(matches[[1]]$Name, c("datsearch", "metadat-package", "prep_dat")),]
 
       } else {

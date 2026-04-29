@@ -34,7 +34,7 @@ head(dat.baker2009)
 
 \dontrun{
 ### Load netmeta package
-suppressPackageStartupMessages(library("netmeta"))
+suppressPackageStartupMessages(library(netmeta))
 
 ### Print odds ratios and confidence limits with two digits
 oldset <- settings.meta(digits = 2)
@@ -48,7 +48,7 @@ pw <- pairwise(treatment, exac, total, studlab = paste(study, year),
 
 ### Conduct random effects network meta-analysis (NMA)
 ### with placebo as reference
-net <- netmeta(pw, fixed = FALSE, ref = "plac")
+net <- netmeta(pw, common = FALSE, ref = "plac")
 
 ### Show network graph
 netgraph(net, seq = "optimal", start = "prcomp",
@@ -75,9 +75,10 @@ settings.meta(oldset)
 }
 \keyword{datasets}
 \concept{medicine}
+\concept{pulmonology}
 \concept{odds ratios}
 \concept{network meta-analysis}
 \concept{component network meta-analysis}
 \section{Concepts}{
-   medicine, odds ratios, network meta-analysis, component network meta-analysis
+   medicine, pulmonology, odds ratios, network meta-analysis, component network meta-analysis
 }
